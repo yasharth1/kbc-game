@@ -15,11 +15,6 @@ voices = engine.getProperty('voices')
 winsound.PlaySound("sounds/KBC.wav", winsound.SND_FILENAME)
 print("Welcome to Kaun Banega Crorepati!")
 time.sleep(2)
-def timeout(rightAns, lostAmt):
-  print(f"Time Over!!")
-  print(f"The correct answer is {rightAns}. You win Rs {lostAmt}")
-  exit()
-# print(voices[1].id)
 engine.setProperty('voice', voices[0].id)
 def speak(audio):
     engine.say(audio)
@@ -39,7 +34,10 @@ def wrong(correctAns, winAmt, lostAmt, qno):
     print(f"Wrong answer! The correct answer is {correctAns}! You fall back to Rs {lostAmt}")
     winsound.PlaySound("sounds/" + str(winAmt) + "lose.wav", winsound.SND_FILENAME)
     print("Thank you for playing the game! You played really well!")
+    time.sleep(1.5)
+    print("We will now take your leave")
     winsound.PlaySound("sounds/closing.wav", winsound.SND_FILENAME)
+    print(":-)")
     exit()
   else:
     print(f"Wrong answer! The correct answer is {correctAns}! You fall back to Rs {lostAmt}")
@@ -77,6 +75,16 @@ def flip(winAmt, lostAmt, quitAmt, time_limit, qno):
   global flipUsed
   flipUsed = True
   print("Activating Flip the Question Lifeline...")
+  print("Before proceeding, we would like you to guess the answer")
+  flip_input = input("Guess an answer)
+  if flip_input == rightAns:
+    print("Your answer would have been correct!")
+    time.sleep(1)
+    print("Now flipping the question...")
+  else:
+    print("Your answer would have been wrong! Thank God you took a lifeline")
+    time.sleep(2)
+    print("Now flipping the question...")
   time.sleep(1.5)
   if qno <= 5:
     try:
