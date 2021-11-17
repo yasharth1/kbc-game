@@ -60,15 +60,19 @@ def ask_the_expert(lostAmt, winAmt, quitAmt, rightAns, firstOp, secondOp, rightO
   speak("Let me see this question once.")
   print(f"I believe answer of this question should be {rightOp}")
   speak(f"I believe answer of this question should be {rightOp}")
-  try:
-    winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
-    user_input = inputimeout(prompt="Enter your answer", timeout=time_limit).lower()
-    check_ans(user_input, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
-  except TimeoutOccurred:
-    winsound.PlaySound("sounds/" + str(winAmt) + "lose.wav", winsound.SND_FILENAME)
-    print("Time Over!!")
-    print(f"The correct answer is {rightOp} ! You win Rs {lostAmt}")
-    exit()
+  if qno < 11:
+    try:
+      winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
+      user_input = inputimeout(prompt="Enter your answer", timeout=time_limit).lower()
+      check_ans(user_input, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
+    except TimeoutOccurred:
+      winsound.PlaySound("sounds/" + str(winAmt) + "lose.wav", winsound.SND_FILENAME)
+      print("Time Over!!")
+      print(f"The correct answer is {rightOp} ! You win Rs {lostAmt}")
+      exit()
+  else:
+    user_input = input("Enter your answer").lower()
+    check_ans(user_input, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)    
 def flip(winAmt, lostAmt, quitAmt, time_limit, qno):
   global flipUsed
   flipUsed = True
@@ -99,34 +103,36 @@ def flip(winAmt, lostAmt, quitAmt, time_limit, qno):
       print(f"The correct answer is d)Coaches ! You win Rs {lostAmt}")
       exit()
   elif qno > 10:
+    winsound.PlaySound("sounds/" + str(winAmt) + "play.wav", winsound.SND_FILENAME)
+    print("When the Lucknow pact was adopted in 1916 Mohammad Ali Jinnah represented the Muslin League, who represented the Indian National Congress?")
+    time.sleep(1.5)
+    "a)Mahatma Gandhi b)Bal Gangadhar Tilak c)Motilal Nehru d)Sardar Vallabhbhai Patel"
+    winsound.PlaySound("sounds/" + str(winAmt) + "ques.wav", winsound.SND_FILENAME)
+    flip_3 = input("Enter your answer").lower()
+    check_ans(flip_3, winAmt, lostAmt, quitAmt, "b", "a)Mahatma Gandhi", "b)Bal Gangadhar Tilak", "b)Bal Gangadhar Tilak", time_limit, qno)
+def fifty_fifty(lostAmt, winAmt, quitAmt, firstOp, secondOp, rightOp, rightAns, time_limit, qno):
+  if qno < 11:
+    global fiftyUsed
+    fiftyUsed = True
     try:
-      winsound.PlaySound("sounds/question.wav", winsound.SND_FILENAME)
-      print("When the Lucknow pact was adopted in 1916 Mohammad Ali Jinnah represented the Muslin League, who represented the Indian National Congress?")
-      time.sleep(1.5)
-      "a)Mahatma Gandhi b)Bal Gangadhar Tilak c)Motilal Nehru d)Sardar Vallabhbhai Patel"
-      winsound.PlaySound("sounds/timer.wav", winsound.SND_FILENAME)
-      flip_3 = input("Enter your answer").lower()
-      check_ans(flip_3, winAmt, lostAmt, quitAmt, "b", "a)Mahatma Gandhi", "b)Bal Gangadhar Tilak", "b)Bal Gangadhar Tilak", time_limit, qno)
+      time.sleep(2)
+      winsound.PlaySound("sounds/fifty2.wav", winsound.SND_FILENAME)
+      print(f"Two options are left {firstOp} and {secondOp}")
+      winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
+      userAns = inputimeout("Enter your answer!", timeout=time_limit).lower()
+      check_ans(userAns, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
     except TimeoutOccurred:
       winsound.PlaySound("sounds/" + str(winAmt) + "lose.wav", winsound.SND_FILENAME)
       print("Time Over!!")
-      print(f"The correct answer is d)Coaches ! You win Rs {lostAmt}")
+      print(f"Right answer is {rightAns}. You win Rs {lostAmt}")
       exit()
-def fifty_fifty(lostAmt, winAmt, quitAmt, firstOp, secondOp, rightOp, rightAns, time_limit, qno):
-  try:
-    global fiftyUsed
-    fiftyUsed = True
+  else:
     time.sleep(2)
     winsound.PlaySound("sounds/fifty2.wav", winsound.SND_FILENAME)
     print(f"Two options are left {firstOp} and {secondOp}")
-    winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
-    userAns = inputimeout("Enter your answer!", timeout=time_limit).lower()
+    winsound.PlaySound("sounds/" + str(winAmt) + "ques.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
+    userAns = input("Enter your answer!").lower()
     check_ans(userAns, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
-  except TimeoutOccurred:
-    winsound.PlaySound("sounds/" + str(winAmt) + "lose.wav", winsound.SND_FILENAME)
-    print("Time Over!!")
-    print(f"Right answer is {rightAns}. You win Rs {lostAmt}")
-    exit()
 def audience_poll(lostAmt, winAmt, quitAmt, firstOp, secondOp, rightOp, rightAns, time_limit, qno, a_percent, b_percent, c_percent, d_percent):
   global apUsed
   apUsed = True
@@ -140,14 +146,18 @@ def audience_poll(lostAmt, winAmt, quitAmt, firstOp, secondOp, rightOp, rightAns
   percent = [a_percent, b_percent, c_percent, d_percent]
   plt.bar(options, percent, color ='maroon', width = 0.4)
   plt.show()
-  try:
-    winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
-    answer = inputimeout(prompt="Enter Your answer", timeout=time_limit).lower()
-    check_ans(answer, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
-  except TimeoutOccurred:
-    print(f"Time Over!!")
-    print(f"The correct answer is {rightOp}. You win {lostAmt}")
-    exit()
+  if qno < 11:
+    try:
+      winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
+      answer = inputimeout(prompt="Enter Your answer", timeout=time_limit).lower()
+      check_ans(answer, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
+    except TimeoutOccurred:
+      print(f"Time Over!!")
+      print(f"The correct answer is {rightOp}. You win {lostAmt}")
+      exit()
+  else:
+    answer = input(prompt="Enter Your answer").lower()
+    check_ans(answer, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)    
 def useLifeline(ll_input, lostAmt, winAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno):
   if ll_input == "lifeline":
     if fiftyUsed == True and apUsed == True and ateUsed == True and flipUsed == True:
@@ -194,6 +204,13 @@ def useLifeline(ll_input, lostAmt, winAmt, quitAmt, rightAns, firstOp, secondOp,
       useLifeline(ll_input, lostAmt, winAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
     elif hello == "n" or hello == "N":
       return "Bye! You are not worthy to play this game"
+def useLifeline_2(input, lostAmt, winAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno):
+  hello = input("Do you want to use the 50-50 lifeline? (Y/n)").lower()
+  if hello == "y":
+    fifty_fifty(lostAmt, winAmt, quitAmt, firstOp, secondOp, rightOp, rightAns, time_limit, qno)
+  else:
+    hello2 = input("Okay! Please enter your answer or quit! ")
+    check_ans(hello2, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
 def check_ans(input, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno):
   if qno > 5 and qno != 5 and qno != 11 and qno != 6 and qno != 15:
     if input == rightAns or input == rightAns.upper():
@@ -263,6 +280,17 @@ def check_ans(input, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, righ
       print("Wise decision! It is only safe to quit at this point if you aren't sure!")
       time.sleep(1.5)
       print(f"Thank you for playing! You win Rs {quitAmt}")
+      winsound.PlaySound("sounds/closing.wav", winsound.SND_FILENAME)
+    elif input == "lifeline":
+      print("You can only use the Fifty-Fifty lifeline. All other lifelines are disbanded")
+      useLifeline_2(input, lostAmt, winAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
+    else:
+      winsound.PlaySound("sounds/10000000lose.wav", winsound.SND_FILENAME)
+      print("Oh no! That's the wrong answer! You fall back to Rs 3,20,000!")
+      time.sleep(2)
+      print("You should have quit if you were not sure! I feel sad for you :-(")
+      time.sleep(1)
+      print("Nevertheless, you played really well! Thank you for playing!")
       winsound.PlaySound("sounds/closing.wav", winsound.SND_FILENAME)
 def first():
   print("The 1st question for Rs 1000")
@@ -405,7 +433,7 @@ def sixth():
   try:
     winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
     input6 = inputimeout(prompt="Enter your Answer", timeout=60).lower()
-    check_ans(input6, 20000, 10000, 10000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", 45, 6)
+    check_ans(input6, 20000, 10000, 10000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", 60, 6)
   except TimeoutOccurred:
     print("Time over!!")
     winsound.PlaySound("sounds/20000lose.wav", winsound.SND_FILENAME)
@@ -424,7 +452,7 @@ def seventh():
   try:
     winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
     input7 = inputimeout(prompt="Enter your Answer", timeout=60).lower()
-    check_ans(input7, 40000, 0, 20000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", 45, 7)
+    check_ans(input7, 40000, 0, 20000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", 60, 7)
   except TimeoutOccurred:
     print("Time over!!")
     winsound.PlaySound("sounds/40000lose.wav", winsound.SND_FILENAME)
@@ -444,7 +472,7 @@ def eighth():
   try:
     winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
     input8 = inputimeout(prompt="Enter your Answer", timeout=60).lower()
-    check_ans(input8, 80000, 10000, 40000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", 45, 8)
+    check_ans(input8, 80000, 10000, 40000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", 60, 8)
   except TimeoutOccurred:
     print("Time over!!")
     winsound.PlaySound("sounds/80000lose.wav", winsound.SND_FILENAME)
@@ -464,7 +492,7 @@ def ninth():
   try:
     winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
     input9 = inputimeout(prompt="Enter your Answer", timeout=60).lower()
-    check_ans(input9, 160000, 10000, 80000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", 45, 9)
+    check_ans(input9, 160000, 10000, 80000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", 60, 9)
   except TimeoutOccurred:
     print("Time over!!")
     winsound.PlaySound("sounds/160000lose.wav", winsound.SND_FILENAME)
@@ -484,7 +512,7 @@ def tenth():
   try:
     winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
     input10 = inputimeout(prompt="Enter your Answer", timeout=60).lower()
-    check_ans(input10, 320000, 10000, 160000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", 45, 10)
+    check_ans(input10, 320000, 10000, 160000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", 60, 10)
   except TimeoutOccurred:
     print("Time over!!")
     winsound.PlaySound("sounds/320000lose.wav", winsound.SND_FILENAME)
@@ -511,7 +539,7 @@ def eleventh():
   winsound.PlaySound("sounds/640000ques.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
   print("a)Raja Harishchandra b)Alam Ara c)Shaheed d)Shree 420")
   input11 = input("Enter your Answer").lower()
-  check_ans(input11, 640000, 320000, 320000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", 45, 11)
+  check_ans(input11, 640000, 320000, 320000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", None, 11)
 eleventh()
 def twelfth():
   time.sleep(2)
@@ -525,7 +553,7 @@ def twelfth():
   print("a)Raja Harishchandra b)Alam Ara c)Shaheed d)Shree 420")
   winsound.PlaySound("sounds/1250000ques.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
   input12 = input("Enter your Answer").lower()
-  check_ans(input12, 1250000, 320000, 640000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", 45, 12)
+  check_ans(input12, 1250000, 320000, 640000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", None, 12)
 twelfth()
 def thirteenth():
   time.sleep(2)
@@ -539,7 +567,7 @@ def thirteenth():
   print("a)Raja Harishchandra b)Alam Ara c)Shaheed d)Shree 420")
   winsound.PlaySound("sounds/1250000ques.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
   input13 = input("Enter your Answer").lower()
-  check_ans(input13, 2500000, 320000, 1250000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", 45, 13)
+  check_ans(input13, 2500000, 320000, 1250000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", None, 13)
 thirteenth()
 def fourteenth():
   time.sleep(2)
@@ -553,9 +581,9 @@ def fourteenth():
   print("a)Raja Harishchandra b)Alam Ara c)Shaheed d)Shree 420")
   winsound.PlaySound("sounds/5000000ques.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
   input14 = input("Enter your Answer").lower()
-  check_ans(input14, 5000000, 320000, 2500000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", 45, 14)
+  check_ans(input14, 5000000, 320000, 2500000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", None, 14)
 fourteenth()
-def fifteenth():
+def first_part_of_15th():
   time.sleep(2)
   print("The 15th question for Rs 1,00,00,000")
   time.sleep(1)
@@ -566,6 +594,12 @@ def fifteenth():
   time.sleep(1)
   print("a)Raja Harishchandra b)Alam Ara c)Shaheed d)Shree 420")
   winsound.PlaySound("sounds/10000000ques.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
-  input15 = input("Enter your Answer").lower()
-  check_ans(input15, 10000000, 320000, 5000000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", 45, 15)
-fifteenth()
+  def fifteenth():
+    input15 = input("Enter your Answer").lower()
+    confirm = input("Are you sure? (y/n)").lower()
+    if confirm == "y":
+      check_ans(input15, 10000000, 320000, 5000000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", None, 15)
+    else:
+      fifteenth()
+  fifteenth()
+first_part_of_15th()
