@@ -33,11 +33,6 @@ print("Type 'lifeline' to use a lifeline and 'quit' to quit the game")
 time.sleep(1)
 print("Good Luck!")
 time.sleep(2)
-def timeout(rightAns, lostAmt):
-  print(f"Time Over!!")
-  print(f"The correct answer is {rightAns}. You win Rs {lostAmt}")
-  exit()
-# print(voices[1].id)
 engine.setProperty('voice', voices[0].id)
 def speak(audio):
     engine.say(audio)
@@ -57,7 +52,10 @@ def wrong(correctAns, winAmt, lostAmt, qno):
     print(f"Wrong answer! The correct answer is {correctAns}! You fall back to Rs {lostAmt}")
     winsound.PlaySound("sounds/" + str(winAmt) + "lose.wav", winsound.SND_FILENAME)
     print("Thank you for playing the game! You played really well!")
+    time.sleep(1.5)
+    print("We will now take your leave")
     winsound.PlaySound("sounds/closing.wav", winsound.SND_FILENAME)
+    print(":-)")
     exit()
   else:
     print(f"Wrong answer! The correct answer is {correctAns}! You fall back to Rs {lostAmt}")
@@ -96,7 +94,11 @@ def flip(winAmt, lostAmt, quitAmt, rightAns, time_limit, qno):
   flipUsed = True
   print("Activating Flip the Question Lifeline...")
   print("Before proceeding, we would like you to guess the answer")
+<<<<<<< HEAD
   flip_input = input("Guess an answer").lower()
+=======
+  flip_input = input("Guess an answer).lower()
+>>>>>>> 4b3b355296a02c1fa352a5f76b8bb61c594d855e
   if flip_input == rightAns:
     print("Your answer would have been correct!")
     time.sleep(1)
@@ -612,6 +614,7 @@ def fourteenth():
   input14 = input("Enter your Answer").lower()
   check_ans(input14, 5000000, 320000, 2500000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", None, 14)
 fourteenth()
+<<<<<<< HEAD
 time.sleep(2)
 print("The 15th question for Rs 1,00,00,000")
 time.sleep(1)
@@ -630,3 +633,23 @@ def fifteenth():
   else:
     fifteenth()
 fifteenth()
+=======
+time.sleep(2)
+print("The 15th question for Rs 1,00,00,000")
+time.sleep(1)
+print("On your screen!!")
+winsound.PlaySound("sounds/10000000play.wav", winsound.SND_FILENAME)
+time.sleep(0.25)
+print("Which of these films was the first Indian movie with sound and music?")
+time.sleep(1)
+print("a)Raja Harishchandra b)Alam Ara c)Shaheed d)Shree 420")
+winsound.PlaySound("sounds/10000000ques.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
+def fifteenth():
+  input15 = input("Enter your Answer").lower()
+  confirm = input("Are you sure? (y/n)").lower()
+  if confirm == "y":
+    check_ans(input15, 10000000, 320000, 5000000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", None, 15)
+  else:
+    fifteenth()
+fifteenth()
+>>>>>>> 4b3b355296a02c1fa352a5f76b8bb61c594d855e
