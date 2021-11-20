@@ -93,14 +93,14 @@ def flip(winAmt, lostAmt, quitAmt, rightAns, time_limit, qno):
   global flipUsed
   flipUsed = True
   print("Activating Flip the Question Lifeline...")
+  time.sleep(2)
   print("Before proceeding, we would like you to guess the answer")
-<<<<<<< HEAD
+  time.sleep(1)
   flip_input = input("Guess an answer").lower()
-=======
-  flip_input = input("Guess an answer).lower()
->>>>>>> 4b3b355296a02c1fa352a5f76b8bb61c594d855e
+  time.sleep(1.5)
   if flip_input == rightAns:
     print("Your answer would have been correct!")
+    
     time.sleep(1)
     print("Now flipping the question...")
   else:
@@ -323,6 +323,7 @@ def check_ans(input, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, righ
       time.sleep(1)
       print("Nevertheless, you played really well! Thank you for playing!")
       winsound.PlaySound("sounds/closing.wav", winsound.SND_FILENAME)
+      exit()
 def first():
   print("The 1st question for Rs 1000")
   time.sleep(1)
@@ -458,17 +459,17 @@ def sixth():
   time.sleep(1)
   print("On your screen!!")
   time.sleep(0.25)
-  print("Which of these films was the first Indian movie with sound and music?")
+  print("Which Enterprise is constructing the new Parliament building in India?")
   winsound.PlaySound("sounds/20000play.wav", winsound.SND_FILENAME)
-  print("a)Raja Harishchandra b)Alam Ara c)Shaheed d)Shree 420")
+  print("a)Adani Group b)Tata projects c)Larsen and Toubro d)GMR Projects")
   try:
     winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
     input6 = inputimeout(prompt="Enter your Answer", timeout=60).lower()
-    check_ans(input6, 20000, 10000, 10000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", 60, 6)
+    check_ans(input6, 20000, 10000, 10000, "b", "a)Adani Group", "b)Tata Projects", "b)Tata Projects", 60, 6)
   except TimeoutOccurred:
     print("Time over!!")
     winsound.PlaySound("sounds/20000lose.wav", winsound.SND_FILENAME)
-    print("Right answer is b)Alam Ara. You win Rs 0")
+    print("Right answer is b)Tata Projects. You win Rs 0")
     exit()
 sixth()
 def seventh():
@@ -478,8 +479,8 @@ def seventh():
   print("On your screen!!")
   winsound.PlaySound("sounds/40000play.wav", winsound.SND_FILENAME)
   time.sleep(1)
-  print("Which of these films was the first Indian movie with sound and music?")
-  print("a)Raja Harishchandra b)Alam Ara c)Shaheed d)Shree 420")
+  print("The person shown in this video was the Dictator of which Country?")
+  print("a)Haiti b)Japan c)China d)Soviet Union")
   try:
     winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
     input7 = inputimeout(prompt="Enter your Answer", timeout=60).lower()
@@ -613,8 +614,16 @@ def fourteenth():
   winsound.PlaySound("sounds/5000000ques.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
   input14 = input("Enter your Answer").lower()
   check_ans(input14, 5000000, 320000, 2500000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", None, 14)
-fourteenth()
-<<<<<<< HEAD
+fourteenth(); time.sleep(2)
+print("The 15th question for Rs 1,00,00,000")
+time.sleep(1)
+print("On your screen!!")
+winsound.PlaySound("sounds/10000000play.wav", winsound.SND_FILENAME)
+time.sleep(0.25)
+print("Which of these films was the first Indian movie with sound and music?")
+time.sleep(1)
+print("a)Raja Harishchandra b)Alam Ara c)Shaheed d)Shree 420")
+winsound.PlaySound("sounds/10000000ques.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
 time.sleep(2)
 print("The 15th question for Rs 1,00,00,000")
 time.sleep(1)
@@ -632,18 +641,6 @@ def fifteenth():
     check_ans(input15, 10000000, 320000, 5000000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", None, 15)
   else:
     fifteenth()
-fifteenth()
-=======
-time.sleep(2)
-print("The 15th question for Rs 1,00,00,000")
-time.sleep(1)
-print("On your screen!!")
-winsound.PlaySound("sounds/10000000play.wav", winsound.SND_FILENAME)
-time.sleep(0.25)
-print("Which of these films was the first Indian movie with sound and music?")
-time.sleep(1)
-print("a)Raja Harishchandra b)Alam Ara c)Shaheed d)Shree 420")
-winsound.PlaySound("sounds/10000000ques.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
 def fifteenth():
   input15 = input("Enter your Answer").lower()
   confirm = input("Are you sure? (y/n)").lower()
@@ -652,4 +649,4 @@ def fifteenth():
   else:
     fifteenth()
 fifteenth()
->>>>>>> 4b3b355296a02c1fa352a5f76b8bb61c594d855e
+
