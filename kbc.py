@@ -6,32 +6,13 @@ import winsound # pip install winsound
 import time 
 from inputimeout import inputimeout, TimeoutOccurred # pip install inputimeout
 import matplotlib.pyplot as plt # pip install matplotlib
-fiftyUsed = False
+import cv2 as cv # pip install opencv-python
+fiftyUsed = False 
 flipUsed = False
-apUsed = False
+apUsed = False  
 ateUsed = False
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
-winsound.PlaySound("sounds/KBC.wav", winsound.SND_FILENAME)
-print("Welcome to Kaun Banega Crorepati!")
-time.sleep(1)
-print("You will be presented with 15 questions, ranging from Rs 1000 to Rs 1 crore, with two stages.")
-time.sleep(1.5)
-print("There are some softwares which need to be installed. Here are they(Just run pip install SoftwareName in the Terminal):")
-time.sleep(2)
-print("1) Pyttsx3 (For text-to-speech)- pip install pyttsx3")
-time.sleep(1.5)
-print("2) winsound (To play sound)- pip install winsound")
-time.sleep(1.5)
-print("3) inputimeout- pip install inputimeout")
-time.sleep(1.5)
-print("4) Matplotlib- pip install matplotlib")
-time.sleep(1.5)
-print("There are 4 lifelines- Fifty-Fifty, Ask the expert, Flip the Question and Audience poll")
-time.sleep(1.5)
-print("Type 'lifeline' to use a lifeline and 'quit' to quit the game")
-time.sleep(1)
-print("Good Luck!")
 time.sleep(2)
 engine.setProperty('voice', voices[0].id)
 def speak(audio):
@@ -74,6 +55,12 @@ def ask_the_expert(lostAmt, winAmt, quitAmt, rightAns, firstOp, secondOp, rightO
   speak("I am here to help you")
   print("Let me see this question once.")
   speak("Let me see this question once.")
+  time.sleep(2)
+  print("Thinking...")
+  print("Analyzing the brain database...")
+  time.sleep(3)
+  print("Okay, I have found the answer!")
+  time.sleep(3)
   print(f"I believe answer of this question should be {rightOp}")
   speak(f"I believe answer of this question should be {rightOp}")
   if qno < 11:
@@ -480,15 +467,19 @@ def seventh():
   winsound.PlaySound("sounds/40000play.wav", winsound.SND_FILENAME)
   time.sleep(1)
   print("The person shown in this video was the Dictator of which Country?")
-  print("a)Haiti b)Japan c)China d)Soviet Union")
+  image = cv.imread("download34.jpg")
+  cv.imshow("Press any key to exit", image)
+  cv.waitKey(0)
+  cv.destroyAllWindows()
+  print("a)Cuba b)Japan c)China d)Soviet Union")
   try:
     winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
     input7 = inputimeout(prompt="Enter your Answer", timeout=60).lower()
-    check_ans(input7, 40000, 0, 20000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", 60, 7)
+    check_ans(input7, 40000, 0, 20000, "d", "a)Cuba", "d)Soviet Union", "d)Soviet Union", 60, 7)
   except TimeoutOccurred:
     print("Time over!!")
     winsound.PlaySound("sounds/40000lose.wav", winsound.SND_FILENAME)
-    print("Right answer is b)Alam Ara. You win Rs 0")
+    print("Right answer is . You win Rs 10,000")
     exit()
 seventh()
 def eighth():
@@ -508,7 +499,7 @@ def eighth():
   except TimeoutOccurred:
     print("Time over!!")
     winsound.PlaySound("sounds/80000lose.wav", winsound.SND_FILENAME)
-    print("Right answer is b)Alam Ara. You win Rs 0")
+    print("Right answer is b)Alam Ara. You win Rs 10,000")
     exit()
 eighth()
 def ninth():
