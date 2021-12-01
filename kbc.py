@@ -14,11 +14,27 @@ ateUsed = False
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
 time.sleep(2)
+winsound.PlaySound("sounds/KBC.wav", winsound.SND_FILENAME)
+print("Hello and welcome to Kaun Banega Crorepati!")
+time.sleep(2)
+print("There are 15 questions ranging from Rs 1000 to Rs 1 Crore")
+time.sleep(2)
+print("There are two stages, 1st at Rs 10000 and 2nd at Rs 320000")
+time.sleep(2)
+print("There are 4 lifelines-")
+time.sleep(1.5)
+print("1)50-50 2)Ask the expert 3)Audience poll 4)Flip the question")
+time.sleep(3.5)
+print("Type 'lifeline' if you want to use a lifeline")
+time.sleep(2)
+print("You can quit by typing 'quit' if you are not sure of the answer")
+time.sleep(2.5)
+print("So let's start the game!")
+time.sleep(2)
 engine.setProperty('voice', voices[0].id)
 def speak(audio):
     engine.say(audio)
     engine.runAndWait()
-
 def quit(quitAmt, rightAns, rightOp):
   if quitAmt == 10000 or quitAmt == 320000:
     print("I will not let you quit at this point! You will not lose anything even if you get the question wrong!")
@@ -239,6 +255,7 @@ def check_ans(input, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, righ
     elif input == "lifeline":
       useLifeline(input, lostAmt, winAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
     else:
+      winsound.PlaySound("sounds/" + str(winAmt) + "final.wav", winsound.SND_FILENAME)
       wrong(rightOp, winAmt, lostAmt, qno)
   elif qno < 5:
     if input == rightAns or input == rightAns.upper():
@@ -249,6 +266,7 @@ def check_ans(input, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, righ
     elif input == "lifeline":
       useLifeline(input, lostAmt, winAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
     else:
+      winsound.PlaySound("sounds/locknew_1.wav", winsound.SND_FILENAME)
       wrong(rightOp, winAmt, lostAmt, qno)
   elif qno == 5:
     if input == rightAns or input == rightAns.upper():
@@ -260,6 +278,7 @@ def check_ans(input, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, righ
     elif input == "lifeline":
       useLifeline(input, lostAmt, winAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
     else:
+      winsound.PlaySound("sounds/" + str(winAmt) + "final.wav", winsound.SND_FILENAME)
       wrong(rightOp, winAmt, lostAmt, qno)
   elif qno == 10:
     if input == rightAns or input == rightAns.upper():
@@ -271,6 +290,7 @@ def check_ans(input, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, righ
     elif input == "lifeline":
       useLifeline(input, lostAmt, winAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
     else:
+      winsound.PlaySound("sounds/"+ str(winAmt) + "final.wav", winsound.SND_FILENAME)
       wrong(rightOp, winAmt, lostAmt, qno)
   elif qno == 11 or qno == 6:
     if input == rightAns:
@@ -283,6 +303,9 @@ def check_ans(input, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, righ
       check_ans(quit_input, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
     elif input == "lifeline":
       useLifeline(input, lostAmt, winAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
+    else:
+      winsound.PlaySound("sounds/" + str(winAmt) + "final.wav", winsound.SND_FILENAME)
+      wrong(rightOp, winAmt, lostAmt, qno)
   elif qno == 15:
     if input == rightAns:
       winsound.PlaySound("sounds/10000000final.wav", winsound.SND_FILENAME)
@@ -303,6 +326,7 @@ def check_ans(input, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, righ
       print("You can only use the Fifty-Fifty lifeline. All other lifelines are disbanded")
       useLifeline_2(input, lostAmt, winAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
     else:
+      winsound.PlaySound("sounds/" + str(winAmt) + "final.wav", winsound.SND_FILENAME)
       winsound.PlaySound("sounds/10000000lose.wav", winsound.SND_FILENAME)
       print("Oh no! That's the wrong answer! You fall back to Rs 3,20,000!")
       time.sleep(2)
@@ -325,7 +349,7 @@ def first():
   except TimeoutOccurred:
     print("Time over!!")
     winsound.PlaySound("sounds/4000.wav", winsound.SND_FILENAME)
-    print("Right answer is a)Dahi (curd). You win Rs 0")
+    print("Right answer is a)Dahi (curd)! You win Rs 0!")
     exit()
 first()
 def second():
@@ -344,7 +368,7 @@ def second():
   except TimeoutOccurred:
     print("Time over!!")
     winsound.PlaySound("sounds/4000.wav", winsound.SND_FILENAME)
-    print("Right answer is a)Dahi (curd). You win Rs 0")
+    print("Right answer is a)Dahi (curd)!! You win Rs 0!")
     exit()
 second()
 def third():
@@ -362,7 +386,7 @@ def third():
   except TimeoutOccurred:
     print("Time over!!")
     winsound.PlaySound("sounds/4000.wav", winsound.SND_FILENAME)
-    print("Right answer is c)Ahmedabad. You win Rs 0")
+    print("Right answer is c)Ahmedabad!! You win Rs 0!")
     exit()
 third()
 def fourth():
@@ -456,7 +480,7 @@ def sixth():
   except TimeoutOccurred:
     print("Time over!!")
     winsound.PlaySound("sounds/20000lose.wav", winsound.SND_FILENAME)
-    print("Right answer is b)Tata Projects. You win Rs 0")
+    print("Right answer is b)Tata Projects! You fall back Rs 0!")
     exit()
 sixth()
 def seventh():
@@ -466,20 +490,21 @@ def seventh():
   print("On your screen!!")
   winsound.PlaySound("sounds/40000play.wav", winsound.SND_FILENAME)
   time.sleep(1)
-  print("The person shown in this video was the Dictator of which Country?")
-  image = cv.imread("download34.jpg")
+  print("The person shown in this picture was the president of which Country?")
+  print("Press any key to exit (Do NOT press the close icon)")
+  image = cv.imread("jfk.jpg")
   cv.imshow("Press any key to exit", image)
   cv.waitKey(0)
   cv.destroyAllWindows()
-  print("a)Cuba b)Japan c)China d)Soviet Union")
+  print("a)Russia b)Britain c)Canada d)United States of America")
   try:
     winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
     input7 = inputimeout(prompt="Enter your Answer", timeout=60).lower()
-    check_ans(input7, 40000, 0, 20000, "d", "a)Cuba", "d)Soviet Union", "d)Soviet Union", 60, 7)
+    check_ans(input7, 40000, 0, 20000, "d", "c)Canada", "d)United States of America", "d)United States of America", 60, 7)
   except TimeoutOccurred:
     print("Time over!!")
     winsound.PlaySound("sounds/40000lose.wav", winsound.SND_FILENAME)
-    print("Right answer is . You win Rs 10,000")
+    print("Right answer is d)United States of America. You win Rs 10,000")
     exit()
 seventh()
 def eighth():
@@ -489,17 +514,17 @@ def eighth():
   print("On your screen!!")
   winsound.PlaySound("sounds/80000play.wav", winsound.SND_FILENAME)
   time.sleep(0.25)
-  print("Which of these films was the first Indian movie with sound and music?")
+  print("Who was the first Field Marshal of Indian Army?")
   time.sleep(1)
-  print("a)Raja Harishchandra b)Alam Ara c)Shaheed d)Shree 420")
+  print("a)Sam Manekshaw b)Vikram Batra c)K.M. Cariappa d)Mohammed Usman")
   try:
     winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
     input8 = inputimeout(prompt="Enter your Answer", timeout=60).lower()
-    check_ans(input8, 80000, 10000, 40000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", 60, 8)
+    check_ans(input8, 80000, 10000, 40000, "a", "a)Sam Manekshaw", "c)K.M. Cariappa", "a)Sam Manekshaw", 60, 8)
   except TimeoutOccurred:
     print("Time over!!")
     winsound.PlaySound("sounds/80000lose.wav", winsound.SND_FILENAME)
-    print("Right answer is b)Alam Ara. You win Rs 10,000")
+    print("Right answer is a)Sam Manekshaw. You win Rs 10,000")
     exit()
 eighth()
 def ninth():
@@ -509,7 +534,7 @@ def ninth():
   print("On your screen!!")
   winsound.PlaySound("sounds/160000play.wav", winsound.SND_FILENAME)
   time.sleep(0.25)
-  print("Which of these films was the first Indian movie with sound and music?")
+  print("")
   time.sleep(1)
   print("a)Raja Harishchandra b)Alam Ara c)Shaheed d)Shree 420")
   try:
@@ -519,7 +544,7 @@ def ninth():
   except TimeoutOccurred:
     print("Time over!!")
     winsound.PlaySound("sounds/160000lose.wav", winsound.SND_FILENAME)
-    print("Right answer is b)Alam Ara. You win Rs 0")
+    print("Right answer is b)Alam Ara. You win Rs 10000")
     exit()
 ninth()
 def tenth():
@@ -539,7 +564,7 @@ def tenth():
   except TimeoutOccurred:
     print("Time over!!")
     winsound.PlaySound("sounds/320000lose.wav", winsound.SND_FILENAME)
-    print("Right answer is b)Alam Ara. You win Rs 0")
+    print("Right answer is b)Alam Ara. You win Rs 320000")
     exit()
 tenth()
 print("Congratulations, You have successfully passed the 2nd stage! Now you will take at least Rs 3,20,000 from here")
