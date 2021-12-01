@@ -103,11 +103,10 @@ def flip(winAmt, lostAmt, quitAmt, rightAns, time_limit, qno):
   time.sleep(1.5)
   if flip_input == rightAns:
     print("Your answer would have been correct!")
-    
     time.sleep(1)
     print("Now flipping the question...")
   else:
-    print("Your answer would have been wrong! Thank God you took a lifeline")
+    print("Your answer would have been wrong! Thank God you took a lifeline! Correct answr is " + rightAns)
     time.sleep(2)
     print("Now flipping the question...")
   time.sleep(1.5)
@@ -119,7 +118,7 @@ def flip(winAmt, lostAmt, quitAmt, rightAns, time_limit, qno):
       flip_1 = inputimeout(prompt="a)दुम b)पेट c)हाथ d)कान", timeout=time_limit).lower()
       check_ans(flip_1, winAmt, lostAmt, quitAmt, "a", "a)दुम", "c)हाथ", "a)दुम", time_limit, qno)
     except TimeoutOccurred:
-      winsound.PlaySound("sounds/" + winAmt + "lose.wav", winsound.SND_FILENAME)
+      winsound.PlaySound("sounds/4000.wav", winsound.SND_FILENAME)
       print("Time Over!!")
       print(f"The correct answer is a)दुम ! You win Rs {lostAmt}")
       exit()
@@ -193,6 +192,7 @@ def audience_poll(lostAmt, winAmt, quitAmt, firstOp, secondOp, rightOp, rightAns
     answer = input("Enter Your answer").lower()
     check_ans(answer, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)    
 def useLifeline(ll_input, lostAmt, winAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno):
+  winsound.PlaySound("dnjjd.wav", winsound.SND_FILENAME)
   if ll_input == "lifeline":
     if fiftyUsed == True and apUsed == True and ateUsed == True and flipUsed == True:
       print("You have used all the lifelines. Please choose another option")
@@ -492,6 +492,7 @@ def seventh():
   time.sleep(1)
   print("The person shown in this picture was the president of which Country?")
   print("Press any key to exit (Do NOT press the close icon)")
+  time.sleep(3)
   image = cv.imread("jfk.jpg")
   cv.imshow("Press any key to exit", image)
   cv.waitKey(0)
