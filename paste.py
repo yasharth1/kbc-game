@@ -1,10 +1,10 @@
 # Welcome, here are the guideline if you need them again
 # lifeline - to use lifeline
 # quit - to quit
+from threading import Timer
 import pyttsx3  # pip install pyttsx3
 import winsound 
 import time
-from inputimeout import inputimeout, TimeoutOccurred
 import matplotlib.pyplot as plt  # pip install matplotlib
 import cv2 as cv  # pip install opencv-python
 fiftyUsed = False
@@ -32,13 +32,16 @@ time.sleep(2.5)
 print("So let's start the game!")
 time.sleep(2)
 engine.setProperty('voice', voices[0].id)
-
-
 def speak(audio):
     engine.say(audio)
     engine.runAndWait()
-
-
+    from threading import Timer
+def inputtime(input, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno):
+  t = Timer(time_limit, print, [f'Time up!!The correct answer is {rightOp}! You fall back to {lostAmt}'])
+  t.start()
+  prompt = "Enter your answer " % time_limit
+  answer = input(prompt)
+  check_ans(answer, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
 def quit(quitAmt, rightAns, rightOp):
     if quitAmt == 10000 or quitAmt == 320000:
         print("I will not let you quit at this point! You will not lose anything even if you get the question wrong!")
@@ -47,8 +50,6 @@ def quit(quitAmt, rightAns, rightOp):
         print(f"Thank you for playing! You won Rs {quitAmt}!")
         print(f"The correct answer is {rightOp}")
         exit()
-
-
 def wrong(correctAns, winAmt, lostAmt, qno):
     if qno > 5:
         print(f"Wrong answer! The correct answer is {correctAns}! You fall back to Rs {lostAmt}")
@@ -375,7 +376,7 @@ def first():
     print("a)Narendra Modi b)Ram Nath Kovind c)Venkaiah Naidu d)Pranab Mukherjee")
     try:
         winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
-        input1 = inputimeout('Enter your answer', timeout=45).lower()
+        inputtime('Enter your answer', )
         check_ans(input1, 1000, 0, 0, "b", "b)Ram Nath Kovind", "c)Venkaiah Naidu", "b)Ram Nath Kovind", 45, 1)
     except TimeoutOccurred:
         print("Time over!!")
