@@ -5,6 +5,7 @@ from threading import Timer
 import pyttsx3  # pip install pyttsx3
 import winsound 
 import time
+from inputimeout import inputimeout, TimeoutOccured
 import matplotlib.pyplot as plt  # pip install matplotlib
 import cv2 as cv  # pip install opencv-python
 fiftyUsed = False
