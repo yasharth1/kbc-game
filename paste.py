@@ -37,12 +37,13 @@ def speak(audio):
     engine.say(audio)
     engine.runAndWait()
     from threading import Timer
-def inputtime(input, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno):
-  t = Timer(time_limit, print, [f'Time up!!The correct answer is {rightOp}! You fall back to {lostAmt}'])
+def inputtime(rightOp, lostAmt):
+  t = Timer(time_limit, print, [f'Time up!!The correct answer is {rightOp}! You fall back to {lostAmt}'], winsound.PlaySound("sounds/timer.wav", winsound.SND_FILENAME))
   t.start()
   prompt = "Enter your answer " % time_limit
+  global answer
+  winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
   answer = input(prompt)
-  check_ans(answer, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
 def quit(quitAmt, rightAns, rightOp):
     if quitAmt == 10000 or quitAmt == 320000:
         print("I will not let you quit at this point! You will not lose anything even if you get the question wrong!")
@@ -375,20 +376,11 @@ def first():
     print("Who is the current President of India?")
     winsound.PlaySound("sounds/1st.wav", winsound.SND_FILENAME)
     print("a)Narendra Modi b)Ram Nath Kovind c)Venkaiah Naidu d)Pranab Mukherjee")
-    try:
-        winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
-        inputtime('Enter your answer', )
-        check_ans(input1, 1000, 0, 0, "b", "b)Ram Nath Kovind", "c)Venkaiah Naidu", "b)Ram Nath Kovind", 45, 1)
-    except TimeoutOccurred:
-        print("Time over!!")
-        winsound.PlaySound("sounds/4000.wav", winsound.SND_FILENAME)
-        print("Right answer is a)Dahi (curd)! You win Rs 0!")
-        exit()
-
-
+    inputtime("b)Ram Nath Kovind", 0)
+    winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
+    inputtime("b)Ram Nath Kovind", 0)
+    check_ans(answer, 1000, 0, 0, "b", "b)Ram Nath Kovind", "c)Venkaiah Naidu", "b)Ram Nath Kovind", 45, 1)
 first()
-
-
 def second():
     time.sleep(2)
     print("The 2nd question for Rs 2000")
@@ -398,20 +390,9 @@ def second():
     print("What is the main ingredient in Lassi?")
     winsound.PlaySound("sounds/1st.wav", winsound.SND_FILENAME)
     print("a)Dahi (curd) b)Milk c)Dal (Pulses) d)Cheese")
-    try:
-        winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
-        input2 = inputimeout(prompt="Enter your answer", timeout=45).lower()
-        check_ans(input2, 2000, 0, 1000, "a", "a)Dahi (curd)", "b)Milk", "a)Dahi (curd)", 45, 2)
-    except TimeoutOccurred:
-        print("Time over!!")
-        winsound.PlaySound("sounds/4000.wav", winsound.SND_FILENAME)
-        print("Right answer is a)Dahi (curd)!! You win Rs 0!")
-        exit()
-
-
+    inputtime("a)Dahi(Curd)", 0)
+    check_ans(answer, 2000, 0, 1000, "a", "a)Dahi (curd)", "b)Milk", "a)Dahi (curd)", 45, 2)
 second()
-
-
 def third():
     print("The 3rd question for Rs 3000")
     time.sleep(1)
@@ -420,20 +401,9 @@ def third():
     print("Where is the Motera stadium, which is the largest stadium, situated?")
     winsound.PlaySound("sounds/1st.wav", winsound.SND_FILENAME)
     print("a)Delhi b)Mohali c)Ahmedabad d)Chennai")
-    try:
-        winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
-        input3 = inputimeout(prompt="Enter your answer", timeout=45).lower()
-        check_ans(input3, 3000, 0, 2000, "c", "c)Ahmedabad", "d)Chennai", "c)Ahmedabad", 45, 3)
-    except TimeoutOccurred:
-        print("Time over!!")
-        winsound.PlaySound("sounds/4000.wav", winsound.SND_FILENAME)
-        print("Right answer is c)Ahmedabad!! You win Rs 0!")
-        exit()
-
-
+    inputtime("c)Ahmedabad", 0)
+    check_ans(answer, 3000, 0, 2000, "c", "c)Ahmedabad", "d)Chennai", "c)Ahmedabad", 45, 3)
 third()
-
-
 def fourth():
     time.sleep(2)
     print("The 4th question for Rs 5000")
@@ -443,17 +413,8 @@ def fourth():
     print("Which of these films was the first Indian movie with sound and music?")
     winsound.PlaySound("sounds/1st.wav", winsound.SND_FILENAME)
     print("a)Raja Harishchandra b)Alam Ara c)Shaheed d)Shree 420")
-    try:
-        winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
-        input3 = inputimeout(prompt="Enter your Answer", timeout=45).lower()
-        check_ans(input3, 5000, 0, 3000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", 45, 4)
-    except TimeoutOccurred:
-        print("Time over!!")
-        winsound.PlaySound("sounds/4000.wav", winsound.SND_FILENAME)
-        print("Right answer is b)Alam Ara. You win Rs 0")
-        exit()
-
-
+    inputtime("b)Alam Ara", 0)
+    check_ans(input3, 5000, 0, 3000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", 45, 4)
 fourth()
 
 
@@ -462,19 +423,11 @@ def audio1():
 
 
 def option5():
-    try:
-        time.sleep(1)
-        print("a)Sardar Patel b)Maulana Abul Kalam c)Veer Savarkar d)Jawaharlal Nehru")
-        winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
-        input5 = inputimeout(prompt="Enter your Answer", timeout=45).lower()
-        check_ans(input5, 10000, 0, 3000, "d", "c)Veer Savarkar", "d)Jawaharlal Nehru", "d)Jawaharlal Nehru", 45, 5)
-    except TimeoutOccurred:
-        print("Time over!!")
-        winsound.PlaySound("sounds/4000.wav", winsound.SND_FILENAME)
-        print("Right answer is d)Jawaharlal Nehru. You win Rs 0")
-        exit()
-
-
+    time.sleep(1)
+    print("a)Sardar Patel b)Maulana Abul Kalam c)Veer Savarkar d)Jawaharlal Nehru")
+    winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
+    inputtime("d)Jawaharlal Nehru", 0)
+    check_ans(answer, 10000, 0, 3000, "d", "c)Veer Savarkar", "d)Jawaharlal Nehru", "d)Jawaharlal Nehru", 45, 5)
 def fifth():
     time.sleep(2)
     print("The 5th question for Rs 10,000")
@@ -492,34 +445,7 @@ def fifth():
         option5()
     else:
         option5()
-
-
 fifth()
-print("Congratulations, you have passed the first stage! Now you will take at least Rs 10000 from here!")
-time.sleep(2)
-print("Now you will get 60 seconds to answer the questions")
-
-
-def sixth():
-    time.sleep(2)
-    print("The 6th question for Rs 20,000")
-    time.sleep(1)
-    print("On your screen!!")
-    time.sleep(0.25)
-    print("Which of these films was the first Indian movie with sound and music?")
-    winsound.PlaySound("sounds/20000play.wav", winsound.SND_FILENAME)
-    print("a)Raja Harishchandra b)Alam Ara c)Shaheed d)Shree 420")
-    try:
-        winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
-        input6 = inputimeout(prompt="Enter your Answer", timeout=45).lower()
-        check_ans(input6, 20000, 10000, 10000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", 45, 6)
-    except TimeoutOccurred:
-        print("Time over!!")
-        winsound.PlaySound("sounds/20000lose.wav", winsound.SND_FILENAME)
-        print("Right answer is b)Alam Ara. You win Rs 0")
-        exit()
-
-
 print("Congratulations, you have passed the first stage! Now you will take at least Rs 10000 from here!")
 time.sleep(2)
 print("Now you will get 60 seconds to answer the questions")
@@ -532,20 +458,9 @@ def sixth():
     print("Which Enterprise is constructing the new Parliament building in India?")
     winsound.PlaySound("sounds/20000play.wav", winsound.SND_FILENAME)
     print("a)Adani Group b)Tata projects c)Larsen and Toubro d)GMR Projects")
-    try:
-        winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
-        input6 = inputimeout(prompt="Enter your Answer", timeout=60).lower()
-        check_ans(input6, 20000, 10000, 10000, "b", "a)Adani Group", "b)Tata Projects", "b)Tata Projects", 60, 6)
-    except TimeoutOccurred:
-        print("Time over!!")
-        winsound.PlaySound("sounds/20000lose.wav", winsound.SND_FILENAME)
-        print("Right answer is b)Tata Projects! You fall back Rs 0!")
-        exit()
-
-
+    inputtime("b)Tata Projects", 10000)
+    check_ans(answer, 20000, 10000, 10000, "b", "a)Adani Group", "b)Tata Projects", "b)Tata Projects", 60, 6)
 sixth()
-
-
 def seventh():
     time.sleep(2)
     print("The 7th question for Rs 40,000")
@@ -561,21 +476,9 @@ def seventh():
     cv.waitKey(0)
     cv.destroyAllWindows()
     print("a)Russia b)Britain c)Canada d)United States of America")
-    try:
-        winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
-        input7 = inputimeout(prompt="Enter your Answer", timeout=60).lower()
-        check_ans(input7, 40000, 0, 20000, "d", "c)Canada", "d)United States of America", "d)United States of America",
-                  60, 7)
-    except TimeoutOccurred:
-        print("Time over!!")
-        winsound.PlaySound("sounds/40000lose.wav", winsound.SND_FILENAME)
-        print("Right answer is d)United States of America. You win Rs 10,000")
-        exit()
-
-
+    inputtime("d)United States of America", 10000)
+    check_ans(answer, 40000, 0, 20000, "d", "c)Canada", "d)United States of America", "d)United States of America", 60, 7)
 seventh()
-
-
 def eighth():
     time.sleep(2)
     print("The 8th question for Rs 80,000")
@@ -586,20 +489,9 @@ def eighth():
     print("Who was the first Field Marshal of Indian Army?")
     time.sleep(1)
     print("a)Sam Manekshaw b)Vikram Batra c)K.M. Cariappa d)Mohammed Usman")
-    try:
-        winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
-        input8 = inputimeout(prompt="Enter your Answer", timeout=60).lower()
-        check_ans(input8, 80000, 10000, 40000, "a", "a)Sam Manekshaw", "c)K.M. Cariappa", "a)Sam Manekshaw", 60, 8)
-    except TimeoutOccurred:
-        print("Time over!!")
-        winsound.PlaySound("sounds/80000lose.wav", winsound.SND_FILENAME)
-        print("Right answer is a)Sam Manekshaw. You win Rs 10,000")
-        exit()
-
-
+    inputtime("a)Sam Manekshaw", 10000)
+    check_ans(answer, 80000, 10000, 40000, "a", "a)Sam Manekshaw", "c)K.M. Cariappa", "a)Sam Manekshaw", 60, 8)
 eighth()
-
-
 def ninth():
     time.sleep(2)
     print("The 9th question for Rs 1,60,000")
@@ -610,20 +502,9 @@ def ninth():
     print("")
     time.sleep(1)
     print("a)Raja Harishchandra b)Alam Ara c)Shaheed d)Shree 420")
-    try:
-        winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
-        input9 = inputimeout(prompt="Enter your Answer", timeout=60).lower()
-        check_ans(input9, 160000, 10000, 80000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", 60, 9)
-    except TimeoutOccurred:
-        print("Time over!!")
-        winsound.PlaySound("sounds/160000lose.wav", winsound.SND_FILENAME)
-        print("Right answer is b)Alam Ara. You win Rs 10000")
-        exit()
-
-
+    inputtime("b)Alam Ara", 10000)
+    check_ans(answer, 160000, 10000, 80000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", 60, 9)
 ninth()
-
-
 def tenth():
     time.sleep(2)
     print("The 10th question for Rs 3,20,000")
@@ -634,17 +515,8 @@ def tenth():
     print("Which of these films was the first Indian movie with sound and music?")
     time.sleep(1)
     print("a)Raja Harishchandra b)Alam Ara c)Shaheed d)Shree 420")
-    try:
-        winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
-        input10 = inputimeout(prompt="Enter your Answer", timeout=60).lower()
-        check_ans(input10, 320000, 10000, 160000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", 60, 10)
-    except TimeoutOccurred:
-        print("Time over!!")
-        winsound.PlaySound("sounds/320000lose.wav", winsound.SND_FILENAME)
-        print("Right answer is b)Alam Ara. You win Rs 320000")
-        exit()
-
-
+    inputtime("b)Alam Ara", 10000)
+    check_ans(answer, 320000, 10000, 160000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", 60, 10)
 tenth()
 print("Congratulations, You have successfully passed the 2nd stage! Now you will take at least Rs 3,20,000 from here")
 time.sleep(2)
