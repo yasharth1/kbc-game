@@ -2,11 +2,11 @@
 # lifeline - to use lifeline
 # quit - to quit
 from threading import Timer
-import pyttsx3  # pip install pyttsx3
+import pyttsx3
 import winsound
 import time
-import matplotlib.pyplot as plt  # pip install matplotlib
-import cv2 as cv  # pip install opencv-python
+import matplotlib.pyplot as plt
+import cv2 as cv
 fiftyUsed = False
 flipUsed = False
 apUsed = False
@@ -438,7 +438,7 @@ def eighth():
     time.sleep(1)
     print("a)Sam Manekshaw b)Somnath Sharma c)K.M. Cariappa d)Mohammed Usman")
     inputtime("b)Somnath Sharma", 10000, 60)
-    check_ans(answer, 80000, 10000, 40000, "a", "b)Somnath Sharma", "c)K.M. Cariappa", "b)Somnath Sharma", 60, 8)
+    check_ans(answer, 80000, 10000, 40000, "b", "b)Somnath Sharma", "c)K.M. Cariappa", "b)Somnath Sharma", 60, 8)
 eighth()
 def ninth():
     time.sleep(2)
@@ -447,11 +447,11 @@ def ninth():
     print("On your screen!!")
     winsound.PlaySound("sounds/160000play.wav", winsound.SND_FILENAME)
     time.sleep(0.25)
-    print("")
+    print("Q. Which salty lake located at the lowest point of Earth has such high density  that makes it impossible for people to sink?")
     time.sleep(1)
-    print("a)Raja Harishchandra b)Alam Ara c)Shaheed d)Shree 420")
-    inputtime("b)Alam Ara", 10000, 60)
-    check_ans(answer, 160000, 10000, 80000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", 60, 9)
+    print("a)Dead sea b)Lake Baikal c)Caspian Sea d)Vembanad Lake")
+    inputtime("a)Dead Sea", 10000, 60)
+    check_ans(answer, 160000, 10000, 80000, "a", "a)Dead Sea", "c)Caspian Sea", "b)Alam Ara", 60, 9)
 ninth()
 def tenth():
     time.sleep(2)
