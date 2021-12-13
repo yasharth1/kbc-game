@@ -469,8 +469,6 @@ print("The questions are slowly going to get difficult, so play wisely and quit 
 time.sleep(1.5)
 print("Good Luck!")
 time.sleep(1)
-
-
 def eleventh():
     time.sleep(2)
     print("The 11th question for Rs 6,40,000")
