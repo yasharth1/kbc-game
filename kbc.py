@@ -14,35 +14,17 @@ ateUsed = False
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
 time.sleep(2)
-winsound.PlaySound("sounds/KBC.wav", winsound.SND_FILENAME)
-print("Hello and welcome to Kaun Banega Crorepati!")
-time.sleep(2)
-print("There are 15 questions ranging from Rs 1000 to Rs 1 Crore")
-time.sleep(2)
-print("There are two stages, 1st at Rs 10000 and 2nd at Rs 320000")
-time.sleep(2)
-print("There are 4 lifelines-")
-time.sleep(1.5)
-print("1)50-50 2)Ask the expert 3)Audience poll 4)Flip the question")
-time.sleep(3.5)
-print("Type 'lifeline' if you want to use a lifeline")
-time.sleep(2)
-print("You can quit by typing 'quit' if you are not sure of the answer")
-time.sleep(2.5)
-print("So let's start the game!")
-time.sleep(2)
+
 engine.setProperty('voice', voices[0].id)
 def speak(audio):
     engine.say(audio)
     engine.runAndWait()
-    from threading import Timer
 def inputtime(rightOp, lostAmt, time_limit):
-  t = Timer(time_limit, print, [f'Time up!!The correct answer is {rightOp}! You fall back to {lostAmt}'], winsound.PlaySound("sounds/timer.wav", winsound.SND_FILENAME))
+  t = Timer(time_limit, print, [f'Time up!!The correct answer is {rightOp}! You fall back to {lostAmt}'], winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC))
   t.start()
-  prompt = "Enter your answer " % time_limit
   global answer
-  winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
-  answer = input(prompt)
+  answer = input("Enter your answer ").lower()
+  t.cancel()
 def quit(quitAmt, rightAns, rightOp):
     if quitAmt == 10000 or quitAmt == 320000:
         print("I will not let you quit at this point! You will not lose anything even if you get the question wrong!")
@@ -252,7 +234,6 @@ def check_ans(input, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, righ
         elif input == "lifeline":
             useLifeline(input, lostAmt, winAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
         else:
-            winsound.PlaySound("sounds/locknew_1.wav", winsound.SND_FILENAME)
             wrong(rightOp, winAmt, lostAmt, qno)
     elif qno == 5:
         if input == rightAns or input == rightAns.upper():
@@ -328,8 +309,6 @@ def first():
     print("Who is the current President of India?")
     winsound.PlaySound("sounds/1st.wav", winsound.SND_FILENAME)
     print("a)Narendra Modi b)Ram Nath Kovind c)Venkaiah Naidu d)Pranab Mukherjee")
-    inputtime("b)Ram Nath Kovind", 0)
-    winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
     inputtime("b)Ram Nath Kovind", 0, 45)
     check_ans(answer, 1000, 0, 0, "b", "b)Ram Nath Kovind", "c)Venkaiah Naidu", "b)Ram Nath Kovind", 45, 1)
 first()
