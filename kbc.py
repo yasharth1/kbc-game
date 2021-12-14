@@ -13,7 +13,6 @@ apUsed = False
 ateUsed = False
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
-time.sleep(2)
 winsound.PlaySound("sounds/KBC.wav", winsound.SND_FILENAME)
 print("Hello and welcome to Kaun Banega Crorepati!")
 time.sleep(2)
@@ -56,7 +55,9 @@ def quit(quitAmt, rightAns, rightOp):
     confirm = input("Are you sure you want to quit?(y/n) ").lower()
     if confirm == "y":
       print(f"Thank you for playing! You won Rs {quitAmt}!")
+      time.sleep(2)
       print(f"The correct answer is {rightOp}")
+      time.sleep(2)
       print("We will take your leave now!")
       winsound.PlaySound("sounds/closing.wav", winsound.SND_FILENAME)
       exit()
@@ -239,7 +240,6 @@ def useLifeline_2(input12, lostAmt, winAmt, quitAmt, rightAns, firstOp, secondOp
       hello2 = input("Okay! Please enter your answer or quit! ").lower()
       check_ans(hello2, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
 def check_ans(input, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno):
-  
   if qno > 5 and qno != 5 and qno != 11 and qno != 6 and qno != 15:
     if input == rightAns or input == rightAns.upper():
       winsound.PlaySound("sounds/" + str(winAmt) + "final.wav", winsound.SND_FILENAME)
@@ -254,7 +254,7 @@ def check_ans(input, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, righ
       wrong(rightOp, winAmt, lostAmt, qno)
   elif qno < 5:
     if input == rightAns:
-      winsound.PlaySound("sounds/correct-answer_1.wav", winsound.SND_ASYNC)
+      winsound.PlaySound("sounds/correct-answer_1.wav", winsound.SND_FILENAME)
       time.sleep(1.5)
       print(f"Correct Answer! You win Rs {winAmt}")
       time.sleep(2)
@@ -395,7 +395,6 @@ def fifth():
   time.sleep(2)
   print("Identify the renowned freedom fighter and politician in this audio clip")
   time.sleep(2)
-  winsound.PlaySound("sounds/1st.wav", winsound.SND_FILENAME)
   winsound.PlaySound("sounds/trystwithdestiny.wav", winsound.SND_FILENAME)
   repeat = input("Do you want to hear the audio again?(y/n) ").lower()
   if repeat == "y" or repeat == "Y":
