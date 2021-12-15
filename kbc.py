@@ -106,6 +106,7 @@ def ask_the_expert(lostAmt, winAmt, quitAmt, rightAns, firstOp, secondOp, rightO
     inputtime(rightOp, lostAmt, time_limit)
     check_ans(answer, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
   else:
+    winsound.PlaySound("sounds/" + str(winAmt) + "ques.wav", winsound.SND_FILENAME)
     user_input = input("Enter your answer ").lower()
     check_ans(user_input, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
 def flip(winAmt, lostAmt, quitAmt, rightAns, time_limit, qno):
