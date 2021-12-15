@@ -67,22 +67,22 @@ def quit(quitAmt, rightAns, rightOp):
       input("Enter your answer ").lower()
 def wrong(correctAns, winAmt, lostAmt, qno):
   if qno > 5:
-      print(f"Wrong answer! The correct answer is {correctAns}! You fall back to Rs {lostAmt}")
-      winsound.PlaySound("sounds/" + str(winAmt) + "lose.wav", winsound.SND_FILENAME)
-      print("Thank you for playing the game! You played really well!")
-      time.sleep(1.5)
-      print("We will now take your leave")
-      winsound.PlaySound("sounds/closing.wav", winsound.SND_FILENAME)
-      print(":-)")
-      exit()
+    print(f"Wrong answer! The correct answer is {correctAns}! You fall back to Rs {lostAmt}")
+    winsound.PlaySound("sounds/" + str(winAmt) + "lose.wav", winsound.SND_FILENAME)
+    print("Thank you for playing the game! You played really well!")
+    time.sleep(1.5)
+    print("We will now take your leave")
+    winsound.PlaySound("sounds/closing.wav", winsound.SND_FILENAME)
+    print(":-)")
+    exit()
   else:
-      print(f"Wrong answer! The correct answer is {correctAns}! You fall back to Rs {lostAmt}")
-      winsound.PlaySound("sounds/4000.wav", winsound.SND_FILENAME)
-      print("Thank you for playing the game! You played really well, but unfortunately, you gave a wrong answer!")
-      time.sleep(2)
-      print("We will take your leave now!")
-      winsound.PlaySound("sounds/closing.wav", winsound.SND_FILENAME)
-      exit()
+    print(f"Wrong answer! The correct answer is {correctAns}! You fall back to Rs {lostAmt}")
+    winsound.PlaySound("sounds/4000.wav", winsound.SND_FILENAME)
+    print("Thank you for playing the game! You played really well, but unfortunately, you gave a wrong answer!")
+    time.sleep(2)
+    print("We will take your leave now!")
+    winsound.PlaySound("sounds/closing.wav", winsound.SND_FILENAME)
+    exit()
 def ask_the_expert(lostAmt, winAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno):
   global ateUsed
   ateUsed = True
@@ -130,7 +130,7 @@ def flip(winAmt, lostAmt, quitAmt, rightAns, time_limit, qno):
     winsound.PlaySound("sounds/1st.wav", winsound.SND_FILENAME)
     print("Fill in the blank in this hindi proverb which means to run away- '______ Dabaakar Bhaagna'")
     winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
-    flip_1 = inputtime("a)दुम", 0, 45)
+    inputtime("a)दुम", 0, 45)
     check_ans(answer, winAmt, lostAmt, quitAmt, "a", "a)दुम", "c)हाथ", "a)दुम", time_limit, qno)
   elif qno > 5 and qno <= 10:
     winsound.PlaySound("sounds/question.wav", winsound.SND_FILENAME)
@@ -141,13 +141,13 @@ def flip(winAmt, lostAmt, quitAmt, rightAns, time_limit, qno):
     winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
     check_ans(answer, winAmt, lostAmt, quitAmt, "d", "d)Support Staff", "d)Coaches", "d)Coaches", time_limit, qno)
   elif qno > 10:
-      winsound.PlaySound("sounds/" + str(winAmt) + "play.wav", winsound.SND_FILENAME)
-      print("When the Lucknow pact was adopted in 1916 Mohammad Ali Jinnah represented the Muslim League, who represented the Indian National Congress?")
-      time.sleep(1.5)
-      print("a)Mahatma Gandhi b)Lokmanya Tilak Tilak c)Motilal Nehru d)Sardar Vallabhbhai Patel")
-      winsound.PlaySound("sounds/" + str(winAmt) + "ques.wav", winsound.SND_FILENAME)
-      flip_3 = input("Enter your answer ").lower()
-      check_ans(flip_3, winAmt, lostAmt, quitAmt, "b", "a)Mahatma Gandhi", "b)Lokmanya Tilak", "b)Lokmanya Tilak", time_limit, qno)
+    winsound.PlaySound("sounds/" + str(winAmt) + "play.wav", winsound.SND_FILENAME)
+    print("When the Lucknow pact was adopted in 1916 Mohammad Ali Jinnah represented the Muslim League, who represented the Indian National Congress?")
+    time.sleep(1.5)
+    print("a)Mahatma Gandhi b)Lokmanya Tilak Tilak c)Motilal Nehru d)Sardar Vallabhbhai Patel")
+    winsound.PlaySound("sounds/" + str(winAmt) + "ques.wav", winsound.SND_FILENAME)
+    flip_3 = input("Enter your answer ").lower()
+    check_ans(flip_3, winAmt, lostAmt, quitAmt, "b", "a)Mahatma Gandhi", "b)Lokmanya Tilak", "b)Lokmanya Tilak", time_limit, qno)
 def fifty_fifty(lostAmt, winAmt, quitAmt, firstOp, secondOp, rightOp, rightAns, time_limit, qno):
   global fiftyUsed
   fiftyUsed = True
@@ -156,7 +156,7 @@ def fifty_fifty(lostAmt, winAmt, quitAmt, firstOp, secondOp, rightOp, rightAns, 
     winsound.PlaySound("sounds/fifty2.wav", winsound.SND_FILENAME)
     print(f"Two options are left {firstOp} and {secondOp}")
     winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
-    userAns = inputtime(rightOp, lostAmt, time_limit)
+    inputtime(rightOp, lostAmt, time_limit)
     check_ans(answer, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
   else:
     time.sleep(2)
