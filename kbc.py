@@ -232,7 +232,7 @@ def useLifeline(ll_input, lostAmt, winAmt, quitAmt, rightAns, firstOp, secondOp,
         useLifeline(ll_input, lostAmt, winAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
     elif hello == "n" or hello == "N":
         return "Bye! You are not worthy to play this game"
-def useLifeline_2(input12, lostAmt, winAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno):
+def useLifeline_2(lostAmt, winAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno):
   hello = input("Do you want to use the 50-50 lifeline?(Y/n) ").lower()
   if fiftyUsed == True:
     print("You have already used the 50-50 lifeline! You will have to either answer or quit!")
@@ -325,7 +325,7 @@ def check_ans(input, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, righ
         winsound.PlaySound("sounds/closing.wav", winsound.SND_FILENAME)
       elif input == "lifeline":
         print("You can only use the Fifty-Fifty lifeline. All other lifelines are disbanded")
-        useLifeline_2(input, lostAmt, winAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
+        useLifeline_2(lostAmt, winAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
       else:
         winsound.PlaySound("sounds/" + str(winAmt) + "final.wav", winsound.SND_FILENAME)
         winsound.PlaySound("sounds/10000000lose.wav", winsound.SND_FILENAME)
