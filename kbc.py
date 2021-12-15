@@ -179,13 +179,12 @@ def audience_poll(lostAmt, winAmt, quitAmt, firstOp, secondOp, rightOp, rightAns
   plt.bar(options, percent, color='maroon', width=0.4)
   plt.show()
   if qno < 11:
-    winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
-    answer = inputtime(rightOp, lostAmt, time_limit)
+    inputtime(rightOp, lostAmt, time_limit)
     check_ans(answer, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
   else:
     winsound.PlaySound("sounds/" + str(winAmt) + "ques.wav", winsound.SND_FILENAME)
-    answer = input("Enter Your answer ").lower()
-    check_ans(answer, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
+    ap_input = input("Enter Your answer ").lower()
+    check_ans(ap_input, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
 def useLifeline(ll_input, lostAmt, winAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno):
   winsound.PlaySound("sounds/ping.wav", winsound.SND_FILENAME)
   if ll_input == "lifeline":
