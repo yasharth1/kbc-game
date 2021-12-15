@@ -234,9 +234,13 @@ def useLifeline(ll_input, lostAmt, winAmt, quitAmt, rightAns, firstOp, secondOp,
         return "Bye! You are not worthy to play this game"
 def useLifeline_2(input12, lostAmt, winAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno):
   hello = input("Do you want to use the 50-50 lifeline?(Y/n) ").lower()
-  if hello == "y":
+  if fiftyUsed == True:
+    print("You have already used the 50-50 lifeline! You will have to either answer or quit!")
+  elif fiftyUsed == False:
+    hello = input("Do you want to use the 50-50 lifeline (y/n)?").lower()
+    if hello == "y":
       fifty_fifty(lostAmt, winAmt, quitAmt, firstOp, secondOp, rightOp, rightAns, time_limit, qno)
-  else:
+    else:
       hello2 = input("Okay! Please enter your answer or quit! ").lower()
       check_ans(hello2, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
 def check_ans(input, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno):
@@ -309,6 +313,7 @@ def check_ans(input, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, righ
         time.sleep(1)
         winsound.PlaySound("sounds/10000000win.wav", winsound.SND_FILENAME)
         print("Excellent! You have become a crorepati!")
+        time.sleep(2)
         print("Congratulations! You have won the bumper prize! Very Well played! I am intrigued by your knowledge!")
         time.sleep(2)
         print("Thank you for playing!")
@@ -555,14 +560,7 @@ def fifteenth():
   input15 = input("Enter your Answer ").lower()
   confirm = input("Are you sure?(y/n) ").lower()
   if confirm == "y":
-    check_ans(input15, 10000000, 320000, 5000000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", None, 15)
-  else:
-    fifteenth()
-def fifteenth():
-  input15 = input("Enter your Answer ").lower()
-  confirm = input("Are you sure?(y/n) ").lower()
-  if confirm == "y":
-    check_ans(input15, 10000000, 320000, 5000000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", None, 15)
+    check_ans(input15, 10000000, 320000, 5000000, "d", "c)Shah Bano case", "d)Kesavananda Bharati Case", "d)Kesavananda Bharati Case", None, 15)
   else:
     fifteenth()
 fifteenth()
