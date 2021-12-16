@@ -35,12 +35,12 @@ def speak(audio):
   engine.say(audio)
   engine.runAndWait()
 def inputtime(rightOp, lostAmt, time_limit):
-  t = Timer(time_limit, print, [f'Time up!!The correct answer is {rightOp}! You fall back to {lostAmt}'], winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC))
-  t.start()
+  time = Timer(time_limit, print, [f'Time up!!The correct answer is {rightOp}! You fall back to {lostAmt}'], winsound.PlaySound("sounds/4000.wav", winsound.SND_FILENAME))
+  time.start()
   global answer
   answer = input("Enter your answer ").lower()
-  t.cancel()
-def quit(quitAmt, rightAns, rightOp):
+  time.cancel()
+def quit(winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno):
   if quitAmt == 10000:
     print("I will not let you quit at this point! You will not lose anything even if you get the question wrong!")
     time.sleep(2)
@@ -63,9 +63,16 @@ def quit(quitAmt, rightAns, rightOp):
       winsound.PlaySound("sounds/closing.wav", winsound.SND_FILENAME)
       exit()
     elif confirm == "n":
-      print("Okay, let's continue the game!")
-      time.sleep(2)
-      input("Enter your answer ").lower()
+      if quitAmt > 320000:
+        print("Okay, let's continue the game!")
+        time.sleep(2)
+        winsound.PlaySound("sounds/" + str(winAmt) + "ques.wav", winsound.SND_FILENAME)
+        quit_input = input("Enter your answer ").lower()
+        check_ans(quit_input, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
+      elif quitAmt < 320000:
+        print("Okay, let's continue the game!")
+        time.sleep(2)
+        input("Enter your answer ").lower()
 def wrong(correctAns, winAmt, lostAmt, qno):
   if qno > 5:
     print(f"Wrong answer! The correct answer is {correctAns}! You fall back to Rs {lostAmt}")
@@ -261,7 +268,7 @@ def check_ans(input, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, righ
       print(f"Correct Answer! You win Rs {winAmt}")
       winsound.PlaySound("sounds/" + str(winAmt) + "win" + ".wav", winsound.SND_FILENAME)
     elif input == "quit":
-      quit(quitAmt, rightAns, rightOp)
+      quit(winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
     elif input == "lifeline":
       useLifeline(input, lostAmt, winAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
     else:
@@ -274,7 +281,7 @@ def check_ans(input, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, righ
       print(f"Correct Answer! You win Rs {winAmt}")
       time.sleep(2)
     elif input == "quit":
-      quit(quitAmt, rightAns, rightOp)
+      quit(winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
     elif input == "lifeline":
       useLifeline(input, lostAmt, winAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
     else:
@@ -285,7 +292,7 @@ def check_ans(input, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, righ
         print(f"Correct Answer! You win Rs {winAmt}")
         winsound.PlaySound("sounds/stage1correct.wav", winsound.SND_FILENAME)
       elif input == "quit":
-        quit(quitAmt, rightAns, rightOp)
+        quit(winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
       elif input == "lifeline":
         useLifeline(input, lostAmt, winAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
       else:
@@ -297,7 +304,7 @@ def check_ans(input, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, righ
         print(f"Correct Answer! You win Rs {winAmt}")
         winsound.PlaySound("sounds/320000win.wav", winsound.SND_FILENAME)
       elif input == "quit":
-        quit(quitAmt, rightAns, rightOp)
+        quit(winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
       elif input == "lifeline":
         useLifeline(input, lostAmt, winAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
       else:
