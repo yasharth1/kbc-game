@@ -19,6 +19,7 @@ def speak(audio):
   engine.runAndWait()
 def play(rightOp, lostAmt):
   print(f"\n Time's up! The correct answer is {rightOp}! You fall back to Rs {lostAmt}!")
+  winsound.PlaySound("sounds/4000.wav", winsound.SND_FILENAME)
 def inputtime(rightOp, lostAmt, time_limit):
   t = Timer(time_limit, play, [rightOp, lostAmt])
   t.start()
