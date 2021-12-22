@@ -1,45 +1,31 @@
 # Welcome, here are the guideline if you need them again
 # lifeline - to use lifeline
-# quit - to quit
+# Either run "pip install -r requirements.txt" or install the packages separately
 from threading import Timer
-import pyttsx3
-import winsound
-import time
-import matplotlib.pyplot as plt
-import cv2 as cv
+import pyttsx3 # pip install pyttsx3
+import winsound 
+import time 
+import matplotlib.pyplot as plt # pip install matplotlib
+import cv2 as cv # pip install opencv-python
 fiftyUsed = False
 flipUsed = False
 apUsed = False
 ateUsed = False
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
-winsound.PlaySound("sounds/KBC.wav", winsound.SND_FILENAME)
-print("Hello and welcome to Kaun Banega Crorepati!")
-time.sleep(2)
-print("There are 15 questions ranging from Rs 1000 to Rs 1 Crore")
-time.sleep(2)
-print("There are two stages, 1st at Rs 10000 and 2nd at Rs 320000")
-time.sleep(2)
-print("There are 4 lifelines-")
-time.sleep(1.5)
-print("1)50-50 2)Ask the expert 3)Audience poll 4)Flip the question")
-time.sleep(3.5)
-print("Type 'lifeline' if you want to use a lifeline")
-time.sleep(2)
-print("You can quit by typing 'quit' if you are not sure of the answer")
-time.sleep(2.5)
-print("So let's start the game!")
-time.sleep(2)
 engine.setProperty('voice', voices[0].id)
 def speak(audio):
   engine.say(audio)
   engine.runAndWait()
+def play(rightOp, lostAmt):
+  print(f"\n Time's up! The correct answer is {rightOp}! You fall back to Rs {lostAmt}!")
 def inputtime(rightOp, lostAmt, time_limit):
-  time = Timer(time_limit, print, [f'Time up!!The correct answer is {rightOp}! You fall back to {lostAmt}'], winsound.PlaySound("sounds/4000.wav", winsound.SND_FILENAME))
-  time.start()
+  t = Timer(time_limit, play, [rightOp, lostAmt])
+  t.start()
+  winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
   global answer
-  answer = input("Enter your answer ").lower()
-  time.cancel()
+  answer = input("Enter your answer ")
+  t.cancel()
 def quit(winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno):
   if quitAmt == 10000:
     print("I will not let you quit at this point! You will not lose anything even if you get the question wrong!")
@@ -72,7 +58,7 @@ def quit(winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_li
       elif quitAmt < 320000:
         print("Okay, let's continue the game!")
         time.sleep(2)
-        input("Enter your answer ").lower()
+        inputtime(rightOp, 0, time_limit)
 def wrong(correctAns, winAmt, lostAmt, qno):
   if qno > 5:
     print(f"Wrong answer! The correct answer is {correctAns}! You fall back to Rs {lostAmt}")
@@ -363,7 +349,7 @@ def first():
   print("Who is the current President of India?")
   time.sleep(2)
   print("a)Narendra Modi b)Ram Nath Kovind c)Venkaiah Naidu d)Pranab Mukherjee")
-  inputtime("b)Ram Nath Kovind", 0, 45)
+  inputtime("b)Ram Nath Kovind", 0, 2)
   check_ans(answer, 1000, 0, 0, "b", "b)Ram Nath Kovind", "c)Venkaiah Naidu", "b)Ram Nath Kovind", 45, 1)
 first()
 def second():
