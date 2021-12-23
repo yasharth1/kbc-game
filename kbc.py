@@ -14,6 +14,7 @@ ateUsed = False
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[0].id)
+winsound.PlaySound("sounds/KBC.wav", winsound.SND_FILENAME)
 print("Hello and welcome to Kaun Banega Crorepati!")
 time.sleep(2)
 print("There are 15 questions ranging from Rs 1000 to Rs 1 Crore")
