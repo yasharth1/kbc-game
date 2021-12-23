@@ -4,7 +4,7 @@
 from threading import Timer
 import pyttsx3 # pip install pyttsx3
 import winsound 
-import time 
+import time
 import matplotlib.pyplot as plt # pip install matplotlib
 import cv2 as cv # pip install opencv-python
 fiftyUsed = False
@@ -14,6 +14,22 @@ ateUsed = False
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[0].id)
+print("Hello and welcome to Kaun Banega Crorepati!")
+time.sleep(2)
+print("There are 15 questions ranging from Rs 1000 to Rs 1 Crore")
+time.sleep(2)
+print("There are two stages, 1st at Rs 10000 and 2nd at Rs 320000")
+time.sleep(2)
+print("There are 4 lifelines-")
+time.sleep(1.5)
+print("1)50-50 2)Ask the expert 3)Audience poll 4)Flip the question")
+time.sleep(3.5)
+print("Type 'lifeline' if you want to use a lifeline")
+time.sleep(2)
+print("You can quit by typing 'quit' if you are not sure of the answer")
+time.sleep(2.5)
+print("So let's start the game!")
+time.sleep(2)
 def speak(audio):
   engine.say(audio)
   engine.runAndWait()
