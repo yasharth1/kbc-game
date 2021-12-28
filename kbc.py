@@ -3,7 +3,8 @@
 # Either run "pip install -r requirements.txt" or install the packages separately
 from threading import Timer
 import pyttsx3 # pip install pyttsx3
-import winsound 
+import winsound
+from num2words import num2words 
 import time
 import matplotlib.pyplot as plt # pip install matplotlib
 import cv2 as cv # pip install opencv-python
@@ -28,8 +29,26 @@ print("Type 'lifeline' if you want to use a lifeline")
 time.sleep(2)
 print("You can quit by typing 'quit' if you are not sure of the answer")
 time.sleep(2.5)
+print("Before starting the game, we would like to know your name")
+time.sleep(1.5)
+global name
+name = input("Please enter your name! ")
+print("Thanks for entering!")
+time.sleep(1.5)
 print("So let's start the game!")
 time.sleep(2)
+def cheque(amt):
+  time.sleep(2)
+  print(f"Here's your cheque for Rs {amt}!")
+  time.sleep(1.5)
+  img = cv.imread('cheque.jpg')   #Load the image file into memory
+  word = num2words(amt, lang='en_IN') + " only"
+  cv.putText(img, word, (54, 50), cv.FONT_HERSHEY_SIMPLEX, 0.3, (0,0,0), 0, cv.LINE_AA)
+  cv.putText(img, name, (100, 25), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1, cv.LINE_AA)
+  cv.putText(img, str(amt), (260, 57), cv.FONT_HERSHEY_SIMPLEX, 0.2, (0, 0, 0), 1, cv.LINE_AA)
+  cv.imshow("Your cheque", img)
+  cv.waitKey(0)
+  cv.destroyAllWindows()
 def speak(audio):
   engine.say(audio)
   engine.runAndWait()
@@ -39,7 +58,6 @@ def play(rightOp, lostAmt):
   time.sleep(2)
   while True:
     print("Close the program!")
-  exit()
 def inputtime(rightOp, lostAmt, time_limit):
   t = Timer(time_limit, play, [rightOp, lostAmt])
   t.start()
@@ -48,23 +66,25 @@ def inputtime(rightOp, lostAmt, time_limit):
   answer = input("Enter your answer ")
   t.cancel()
 def quit(winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno):
+  winsound.PlaySound("sounds/ping.wav", winsound.SND_FILENAME)
   if qno == 6:
     print("I will not let you quit at this point! You will not lose anything even if you get the question wrong!")
     time.sleep(2)
     inputtime(rightOp, 0, 45)
-    check_ans(answer, 20000, 10000, 10000, rightAns, firstOp, secondOp, rightOp, 45, 5)
+    check_ans(answer, 20000, 10000, 10000, rightAns, firstOp, secondOp, rightOp, 45, 6)
   elif qno == 11:
     print("I will not let you quit at this point! You will not lose anything even if you get the question wrong!")
     time.sleep(2)
     winsound.PlaySound("sounds/640000ques.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
     quit_input = input("Enter Your answer ").lower()
-    check_ans(quit_input, 640000, 320000, 320000, rightAns, firstOp, secondOp, rightOp, 45, 5)
+    check_ans(quit_input, 640000, 320000, 320000, rightAns, firstOp, secondOp, rightOp, 45, 11)
   else:
     confirm = input("Are you sure you want to quit?(y/n) ").lower()
     if confirm == "y":
       print(f"Thank you for playing! You won Rs {quitAmt}!")
       time.sleep(2)
       print(f"The correct answer is {rightOp}")
+      cheque(quitAmt)
       time.sleep(2)
       print("We will take your leave now!")
       winsound.PlaySound("sounds/closing.wav", winsound.SND_FILENAME)
@@ -86,6 +106,7 @@ def wrong(correctAns, winAmt, lostAmt, qno):
     print(f"Wrong answer! The correct answer is {correctAns}! You fall back to Rs {lostAmt}")
     winsound.PlaySound("sounds/" + str(winAmt) + "lose.wav", winsound.SND_FILENAME)
     print("Thank you for playing the game! You played really well!")
+    cheque(lostAmt)
     time.sleep(1.5)
     print("We will now take your leave")
     winsound.PlaySound("sounds/closing.wav", winsound.SND_FILENAME)
@@ -221,7 +242,7 @@ def useLifeline(ll_input, lostAmt, winAmt, quitAmt, rightAns, firstOp, secondOp,
         check_ans(answer, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
     else:
       global lifeline
-      lifeline = input("What lifeline do you want to use? Type ff' for 50-50, 'flip' for flip the question, 'ate' for ask the expert and 'ap' for audience poll ").lower()
+      lifeline = input("What lifeline do you want to use? Type 'ff' for 50-50, 'flip' for flip the question, 'ate' for ask the expert and 'ap' for audience poll ").lower()
       if lifeline == "ff":
         if fiftyUsed == True:
           print("You have already used the 50-50 lifeline")
@@ -338,6 +359,7 @@ def check_ans(input, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, righ
         print("Excellent! You have become a crorepati!")
         time.sleep(2)
         print("Congratulations! You have won the bumper prize! Very Well played! I am intrigued by your knowledge!")
+        cheque(winAmt)
         time.sleep(2)
         print("Thank you for playing!")
         winsound.PlaySound("sounds/closing.wav", winsound.SND_FILENAME)
@@ -347,6 +369,7 @@ def check_ans(input, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, righ
         print(f"Thank you for playing! You win Rs {quitAmt}")
         time.sleep(1.5)
         print(f"The correct answer is {rightOp}")
+        cheque(quitAmt)
         time.sleep(2)
         print("We will take your leave now!")
         winsound.PlaySound("sounds/closing.wav", winsound.SND_FILENAME)
@@ -358,6 +381,7 @@ def check_ans(input, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, righ
         winsound.PlaySound("sounds/10000000lose.wav", winsound.SND_FILENAME)
         time.sleep(2)
         print("You should have quit if you were not sure! I feel sad for you :-(")
+        cheque(lostAmt)
         time.sleep(1)
         print("Nevertheless, you played really well! Thank you for playing!")
         winsound.PlaySound("sounds/closing.wav", winsound.SND_FILENAME)
@@ -466,7 +490,7 @@ def seventh():
   cv.destroyAllWindows()
   print("a)Russia b)Britain c)Canada d)United States of America")
   inputtime("d)United States of America", 10000, 60)
-  check_ans(answer, 40000, 0, 20000, "d", "c)Canada", "d)United States of America", "d)United States of America", 60, 7)
+  check_ans(answer, 40000, 10000, 20000, "d", "c)Canada", "d)United States of America", "d)United States of America", 60, 7)
 seventh()
 def eighth():
   time.sleep(2)
