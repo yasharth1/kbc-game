@@ -4,8 +4,9 @@
 from threading import Timer
 import pyttsx3 # pip install pyttsx3
 import winsound
-from num2words import num2words 
+from num2words import num2words # pip install num2words 
 import time
+from datetime import date
 import matplotlib.pyplot as plt # pip install matplotlib
 import cv2 as cv # pip install opencv-python
 fiftyUsed = False
@@ -43,9 +44,12 @@ def cheque(amt):
   time.sleep(1.5)
   img = cv.imread('cheque.jpg')   #Load the image file into memory
   word = num2words(amt, lang='en_IN') + " only"
+  year = date.today().year - 2000
+  cv.putText(img, str(date.today().day) + "/" + str(date.today().month), (274, 15), cv.FONT_HERSHEY_SIMPLEX, 0.2, (0, 0, 0), 1, cv.LINE_AA)
+  cv.putText(img, str(year), (315, 15), cv.FONT_HERSHEY_SIMPLEX, 0.2, (0, 0, 0), 1, cv.LINE_AA)
   cv.putText(img, word, (54, 50), cv.FONT_HERSHEY_SIMPLEX, 0.3, (0,0,0), 0, cv.LINE_AA)
   cv.putText(img, name, (100, 25), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1, cv.LINE_AA)
-  cv.putText(img, str(amt), (260, 57), cv.FONT_HERSHEY_SIMPLEX, 0.2, (0, 0, 0), 1, cv.LINE_AA)
+  cv.putText(img, str(amt), (260, 57), cv.FONT_HERSHEY_SIMPLEX, 0.2, (70, 70, 70), 1, cv.LINE_AA)
   cv.imshow("Your cheque", img)
   cv.waitKey(0)
   cv.destroyAllWindows()
