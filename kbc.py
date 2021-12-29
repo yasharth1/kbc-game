@@ -97,7 +97,7 @@ def quit(winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_li
       if quitAmt > 320000:
         print("Okay, let's continue the game!")
         time.sleep(2)
-        winsound.PlaySound("sounds/" + str(winAmt) + "ques.wav", winsound.SND_FILENAME)
+        winsound.PlaySound("sounds/" + str(winAmt) + "ques.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
         quit_input = input("Enter your answer ").lower()
         check_ans(quit_input, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
       elif quitAmt < 320000:
@@ -282,7 +282,7 @@ def useLifeline(ll_input, lostAmt, winAmt, quitAmt, rightAns, firstOp, secondOp,
         hello = input("Invalid input! Do you really want to use a lifeline?(y/n) ").lower()
         if hello == "y":
             useLifeline(ll_input, lostAmt, winAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno)
-        elif hello == "n":
+        else:
           if qno < 11:
             winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
             inputtime(rightOp, lostAmt, time_limit)
@@ -368,6 +368,7 @@ def check_ans(input, winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, righ
         print("Thank you for playing!")
         winsound.PlaySound("sounds/closing.wav", winsound.SND_FILENAME)
       elif input == "quit":
+        winsound.PlaySound("sounds/ping.wav", winsound.SND_FILENAME)
         print("Wise decision! It is only safe to quit at this point if you aren't sure!")
         time.sleep(1.5)
         print(f"Thank you for playing! You win Rs {quitAmt}")
@@ -444,8 +445,6 @@ def option5():
   winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
   inputtime("d)Jawaharlal Nehru", 0, 45)
   check_ans(answer, 10000, 0, 3000, "d", "a)Sardar Patel", "d)Jawaharlal Nehru", "d)Jawaharlal Nehru", 45, 5)
-def audio1():
-  winsound.PlaySound("sounds/trystwithdestiny.wav", winsound.SND_ASYNC)
 def fifth():
   winsound.PlaySound("sounds/1st.wav", winsound.SND_ASYNC)
   print("The 5th question for Rs 10,000")
@@ -458,7 +457,7 @@ def fifth():
   repeat = input("Do you want to hear the audio again?(y/n) ").lower()
   if repeat == "y" or repeat == "Y":
     print("Playing audio...")
-    audio1()
+    winsound.PlaySound("sounds/trystwithdestiny.wav", winsound.SND_FILENAME)
     option5()
   else:
     option5()
@@ -519,7 +518,7 @@ def ninth():
   time.sleep(1)
   print("a)Dead sea b)Lake Baikal c)Caspian Sea d)Vembanad Lake")
   inputtime("a)Dead Sea", 10000, 60)
-  check_ans(answer, 160000, 10000, 80000, "a", "a)Dead Sea", "c)Caspian Sea", "b)Alam Ara", 60, 9)
+  check_ans(answer, 160000, 10000, 80000, "a", "a)Dead Sea", "c)Caspian Sea", "a)Dead Sea", 60, 9)
 ninth()
 def tenth():
   time.sleep(2)
