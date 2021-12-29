@@ -609,8 +609,8 @@ time.sleep(0.25)
 print("Which case was heard by the largest ever constitution bench of 13 Supreme Court judges?")
 time.sleep(1)
 print("a)Golaknath case b)Ashok Kumar case c)Shah Bano case d)Kesavananda Bharati Case.")
-winsound.PlaySound("sounds/10000000ques.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
 def fifteenth():
+  winsound.PlaySound("sounds/10000000ques.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
   input15 = input("Enter your Answer ").lower()
   confirm = input("Are you sure?(y/n) ").lower()
   if confirm == "y":
