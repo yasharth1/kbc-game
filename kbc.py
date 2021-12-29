@@ -486,7 +486,6 @@ def seventh():
   winsound.PlaySound("sounds/40000play.wav", winsound.SND_FILENAME)
   time.sleep(1)
   print("The person shown in this picture was the president of which Country?")
-  print("Press any key to exit (Do NOT press the close icon)")
   time.sleep(3)
   image = cv.imread("jfk.jpg")
   cv.imshow("Press any key to exit", image)
