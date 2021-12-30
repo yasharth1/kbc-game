@@ -490,7 +490,7 @@ def seventh():
   cv.imshow("Press any key to exit", image)
   cv.waitKey(0)
   cv.destroyAllWindows()
-  print("a)Russia b)Britain c)Canada d)United States of America")
+  print("a)USSR b)Britain c)Canada d)United States of America")
   inputtime("d)United States of America", 10000, 60)
   check_ans(answer, 40000, 10000, 20000, "d", "c)Canada", "d)United States of America", "d)United States of America", 60, 7)
 seventh()
