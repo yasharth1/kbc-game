@@ -14,4 +14,4 @@ Before running the code, please run 'pip install -r requirements.txt' in the ter
  5. num2words (pip install num2words)
  6. matplotlib (pip install matplotlib)
  7. OpenCv (pip install opencv-python)
- P.S.- The current code is too long (about 600 lines). Work is in progress to make it much shorter and simple.
+ P.S.- The current code is too long (about 600+ lines). Work is in progress to make it much shorter and simple.
