@@ -6,7 +6,7 @@
  4. A cheque after completing the game
  5. Option to quit if you don't know the answer 
  6. Time limit on first 10 questions (beta)
- Before running the code, please run 'pip install -r requirements.txt' in the terminal. It will install all the required python libraries for running the code. If you want to install them separately, the libraries used are-
+Before running the code, please run 'pip install -r requirements.txt' in the terminal. It will install all the required python libraries for running the code. If you want to install them separately, the libraries used are-
  1. winsound (pre-installed)
  2. time (pre-installed)
  3. datetime (pre-installed)
