@@ -12,10 +12,10 @@ Before running the code, please run 'pip install -r requirements.txt' in the ter
   1. winsound (pre-installed)
   2. time (pre-installed)
   3. datetime (pre-installed)
-  4. pyttsx3 (pip install pyttsx3)
-  5. num2words (pip install num2words)
-  6. matplotlib (pip install matplotlib)
-  7. OpenCv (pip install opencv-python)
+  4. pyttsx3 (*pip install pyttsx3*)
+  5. num2words (*pip install num2words*)
+  6. matplotlib (*pip install matplotlib*)
+  7. OpenCv (*pip install opencv-python*)
  
  <!-- -->
  
