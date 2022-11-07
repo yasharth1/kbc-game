@@ -1,7 +1,6 @@
 # Welcome, here are the guideline if you need them again
 # lifeline - to use lifeline
 # Either run "pip install -r requirements.txt" or install the packages separately
-from threading import Timer
 import pyttsx3 # pip install pyttsx3
 import winsound
 from num2words import num2words # pip install num2words 
