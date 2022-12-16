@@ -82,7 +82,7 @@ def inputtime(rightOp, lostAmt, time_limit):
   end_time = time.time() - start_time
   if end_time > 45 and time_limit == 45:
     time_up(rightOp, lostAmt)
-  elif end_time > 60 and time_limit:
+  elif end_time > 60 and time_limit == 60:
     time_up(rightOp, lostAmt) 
 def quit(winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno):
   winsound.PlaySound("sounds/ping.wav", winsound.SND_FILENAME)
@@ -596,12 +596,12 @@ def thirteenth():
   print("On your screen!!")
   winsound.PlaySound("sounds/2500000play.wav", winsound.SND_FILENAME)
   time.sleep(0.25)
-  print("In World War II, which English code breaker cracked the secret Enigma code used for the German U-boats?")
+  print("When was the Ashes first played?")
   time.sleep(1)
-  print("a)William Thomas Tute b)Marian Rejewski c)Elizabeth Friedman d)Alan Turing")
+  print("a)1923 b)1850 c)1872 d)1885")
   winsound.PlaySound("sounds/1250000ques.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
   input13 = input("Enter your Answer ").lower()
-  check_ans(input13, 2500000, 320000, 1250000, "d", "a)William Thomas Tute", "d)Alan Turing", "d)Alan Turing", None, 13)
+  check_ans(input13, 2500000, 320000, 1250000, "c", "c)1872", "d)1885", "c)1872", None, 13)
 thirteenth()
 def fourteenth():
   time.sleep(2)
@@ -610,12 +610,12 @@ def fourteenth():
   print("On your screen!!")
   winsound.PlaySound("sounds/5000000play.wav", winsound.SND_FILENAME)
   time.sleep(0.25)
-  print("Who among the following was the author of Anand Math?")
+  print("Which of these former presidents of Indiarferferre")
   time.sleep(1)
-  print("a)Bankim Chandra Chatterjee b)Rabindranath Tagore c)Raja Ram Mohan Roy d)Bal Gangadhar Tilak")
+  print("a)Indian Insitute of Science b)IIT Kharagpur c)Jawaharlal Nehru University D)NIT Trichy")
   winsound.PlaySound("sounds/5000000ques.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
   input14 = input("Enter your Answer ").lower()
-  check_ans(input14, 5000000, 320000, 2500000, "a", "a)Bankim Chandra Chatterjee", "b)Rabindranath Tagore", "a)Bankim Chandra Chatterjee", None, 14)
+  check_ans(input14, 5000000, 320000, 2500000, "b", "b)IIT Kharagpur", "c)Jawaharlal Nehru University", "b)IIT Kharagpur", None, 14)
 fourteenth()
 print("You are playing excellent! Now get ready for the last question of the game!")
 time.sleep(3.5)
