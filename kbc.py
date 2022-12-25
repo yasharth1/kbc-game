@@ -35,6 +35,8 @@ print("The first 5 questions have a time limit of 45 seconds,")
 time.sleep(1.5)
 print("While the next 5 questions have a time limit of 60 seconds!")
 time.sleep(2)
+print("\nIf you feel the correct answer is option 'a', then just input 'a' when prompted (Not case-sensitive)")
+time.sleep(3.5)
 print("Before starting the game, we would like to know your name")
 time.sleep(1.5)
 global name
