@@ -78,7 +78,7 @@ global answer
 answer = None
 def inputtime(rightOp, lostAmt, time_limit):
   def input_thread():
-    input_queue.put(input("Enter your answer"))
+    input_queue.put(input("Enter your answer "))
   input_queue = Queue()
   input_thread = threading.Thread(target=input_thread)
   input_thread.daemon = True
@@ -418,9 +418,9 @@ def first():
   time.sleep(2)
   print("Who is the current President of India?")
   time.sleep(2)
-  print("a)Narendra Modi b)Ram Nath Kovind c)Venkaiah Naidu d)Pranab Mukherjee")
-  answer = inputtime("b)Ram Nath Kovind", 0, 5)
-  check_ans(answer, 1000, 0, 0, "b", "b)Ram Nath Kovind", "c)Venkaiah Naidu", "b)Ram Nath Kovind", 45, 1)
+  print("a)Draupadi Murmu b)Ram Nath Kovind c)Venkaiah Naidu d)Pranab Mukherjee")
+  answer = inputtime("a)Draupadi Murmu", 0, 5)
+  check_ans(answer, 1000, 0, 0, "a", "a)Draupadi Murmu", "c)Venkaiah Naidu", "a)Draupadi Murmu", 45, 1)
 first()
 def second():
   winsound.PlaySound("sounds/1st.wav", winsound.SND_ASYNC + winsound.SND_LOOP)
