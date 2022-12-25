@@ -1,9 +1,10 @@
 # Welcome, here are the guideline if you need them again
 # lifeline - to use lifeline
 # Either run "pip install -r requirements.txt" or install the packages separately
-from threading import Timer
+import threading
 import pyttsx3 # pip install pyttsx3
 import winsound
+from queue import Queue
 from num2words import num2words # pip install num2words 
 import time
 from datetime import date
@@ -34,10 +35,6 @@ print("The first 5 questions have a time limit of 45 seconds,")
 time.sleep(1.5)
 print("While the next 5 questions have a time limit of 60 seconds!")
 time.sleep(2)
-print("Python does NOT come with a timer, so keep checking the time!")
-time.sleep(1.5)
-print("If you enter the answer after the time exhausts, it will be considered invalid!")
-time.sleep(2.5)
 print("Before starting the game, we would like to know your name")
 time.sleep(1.5)
 global name
@@ -64,9 +61,11 @@ def cheque(amt):
 def speak(audio):
   engine.say(audio)
   engine.runAndWait()
-def time_up(rightOp, lostAmt):
+def time_up(rightOp, lostAmt, time_limit):
   winsound.PlaySound("sounds/4000.wav", winsound.SND_FILENAME)
-  print(f"\nYou gave the answer after the time limit! The correct answer is {rightOp}! You fall back to Rs {lostAmt}!")
+  print(f"\n{time_limit} seconds have elapsed! Your time is over!!")
+  time.sleep(1)
+  print(f"The correct answer is {rightOp}! You fall back to Rs {lostAmt}!")
   time.sleep(5)
   print("You played really well! Thank you for playing!")
   time.sleep(1.5)
@@ -76,14 +75,17 @@ def time_up(rightOp, lostAmt):
 global answer
 answer = None
 def inputtime(rightOp, lostAmt, time_limit):
-  start_time = time.time()
-  global answer
-  answer = input("Enter your answer ").lower()
-  end_time = time.time() - start_time
-  if end_time > 45 and time_limit == 45:
-    time_up(rightOp, lostAmt)
-  elif end_time > 60 and time_limit == 60:
-    time_up(rightOp, lostAmt) 
+  def input_thread():
+    input_queue.put(input("Enter your answer"))
+  input_queue = Queue()
+  input_thread = threading.Thread(target=input_thread)
+  input_thread.daemon = True
+  input_thread.start()
+  input_thread.join(time_limit)
+  if input_thread.is_alive():
+    time_up(rightOp, lostAmt, time_limit)
+  else:
+    return input_queue.get()
 def quit(winAmt, lostAmt, quitAmt, rightAns, firstOp, secondOp, rightOp, time_limit, qno):
   winsound.PlaySound("sounds/ping.wav", winsound.SND_FILENAME)
   if qno == 6:
@@ -415,7 +417,7 @@ def first():
   print("Who is the current President of India?")
   time.sleep(2)
   print("a)Narendra Modi b)Ram Nath Kovind c)Venkaiah Naidu d)Pranab Mukherjee")
-  inputtime("b)Ram Nath Kovind", 0, 45)
+  answer = inputtime("b)Ram Nath Kovind", 0, 5)
   check_ans(answer, 1000, 0, 0, "b", "b)Ram Nath Kovind", "c)Venkaiah Naidu", "b)Ram Nath Kovind", 45, 1)
 first()
 def second():
@@ -427,7 +429,7 @@ def second():
   print("What is the main ingredient in Lassi?")
   time.sleep(2)
   print("a)Dahi (curd) b)Milk c)Dal (Pulses) d)Cheese")
-  inputtime("a)Dahi(Curd)", 0, 45)
+  answer = inputtime("a)Dahi(Curd)", 0, 45)
   check_ans(answer, 2000, 0, 1000, "a", "a)Dahi (curd)", "b)Milk", "a)Dahi (curd)", 45, 2)
 second()
 def third():
@@ -439,7 +441,7 @@ def third():
   print("Where is the Motera stadium, which is the largest stadium, situated?")
   time.sleep(2)
   print("a)Delhi b)Mohali c)Ahmedabad d)Chennai")
-  inputtime("c)Ahmedabad", 0, 45)
+  answer = inputtime("c)Ahmedabad", 0, 45)
   check_ans(answer, 3000, 0, 2000, "c", "c)Ahmedabad", "d)Chennai", "c)Ahmedabad", 45, 3)
 third()
 def fourth():
@@ -451,14 +453,14 @@ def fourth():
   print("Which of these films was the first Indian movie with sound and music?")
   time.sleep(2)
   print("a)Raja Harishchandra b)Alam Ara c)Shaheed d)Shree 420")
-  inputtime("b)Alam Ara", 0, 45)
+  answer = inputtime("b)Alam Ara", 0, 45)
   check_ans(answer, 5000, 0, 3000, "b", "a)Raja Harishchandra", "b)Alam Ara", "b)Alam Ara", 45, 4)
 fourth()
 def option5():
   time.sleep(1.5)
   print("a)Sardar Patel b)Maulana Abul Kalam c)Veer Savarkar d)Jawaharlal Nehru")
   winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
-  inputtime("d)Jawaharlal Nehru", 0, 45)
+  answer = inputtime("d)Jawaharlal Nehru", 0, 45)
   check_ans(answer, 10000, 0, 3000, "d", "a)Sardar Patel", "d)Jawaharlal Nehru", "d)Jawaharlal Nehru", 45, 5)
 def fifth():
   winsound.PlaySound("sounds/1st.wav", winsound.SND_ASYNC + winsound.SND_LOOP)
@@ -495,24 +497,6 @@ def sixth():
 sixth()
 def seventh():
   time.sleep(2)
-  print("The 7th question for Rs 40,000")
-  time.sleep(1)
-  print("On your screen!!")
-  winsound.PlaySound("sounds/40000play.wav", winsound.SND_FILENAME)
-  time.sleep(1)
-  print("The person shown in this picture was the president of which Country?")
-  time.sleep(3)
-  image = cv.imread("jfk.jpg")
-  cv.imshow("Press any key to exit", image)
-  cv.waitKey(0)
-  cv.destroyAllWindows()
-  print("a)USSR b)Britain c)Canada d)United States of America")
-  winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
-  inputtime("d)United States of America", 10000, 60)
-  check_ans(answer, 40000, 10000, 20000, "d", "c)Canada", "d)United States of America", "d)United States of America", 60, 7)
-seventh()
-def eighth():
-  time.sleep(2)
   print("The 8th question for Rs 80,000")
   time.sleep(1)
   print("On your screen!!")
@@ -523,9 +507,9 @@ def eighth():
   print("a)Sam Manekshaw b)Somnath Sharma c)K.M. Cariappa d)Mohammed Usman")
   winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
   inputtime("b)Somnath Sharma", 10000, 60)
-  check_ans(answer, 80000, 10000, 40000, "b", "b)Somnath Sharma", "c)K.M. Cariappa", "b)Somnath Sharma", 60, 8)
-eighth()
-def ninth():
+  check_ans(answer, 80000, 10000, 40000, "b", "b)Somnath Sharma", "c)K.M. Cariappa", "b)Somnath Sharma", 60, 7)
+seventh()
+def eighth():
   time.sleep(2)
   print("The 9th question for Rs 1,60,000")
   time.sleep(1)
@@ -537,9 +521,9 @@ def ninth():
   print("a)Dead sea b)Lake Baikal c)Caspian Sea d)Vembanad Lake")
   winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
   inputtime("a)Dead Sea", 10000, 60)
-  check_ans(answer, 160000, 10000, 80000, "a", "a)Dead Sea", "c)Caspian Sea", "a)Dead Sea", 60, 9)
-ninth()
-def tenth():
+  check_ans(answer, 160000, 10000, 80000, "a", "a)Dead Sea", "c)Caspian Sea", "a)Dead Sea", 60, 8)
+eighth()
+def ninth():
   time.sleep(2)
   print("The 10th question for Rs 3,20,000")
   time.sleep(1)
@@ -551,7 +535,25 @@ def tenth():
   print("a)Black Holes b)Quantum Theory c)Electronics d)Structure of atoms")
   winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
   inputtime("a)Black Holes", 10000, 60)
-  check_ans(answer, 320000, 10000, 160000, "a", "a)Black Holes", "b)Quantum Theory", "a)Black Holes", 60, 10)
+  check_ans(answer, 320000, 10000, 160000, "a", "a)Black Holes", "b)Quantum Theory", "a)Black Holes", 60, 9)
+ninth()
+def tenth():
+  time.sleep(2)
+  print("The 7th question for Rs 40,000")
+  time.sleep(1)
+  print("On your screen!!")
+  winsound.PlaySound("sounds/40000play.wav", winsound.SND_FILENAME)
+  time.sleep(1)
+  print("The person shown in this picture attacked which country, a decision that was made due to his country's policy of containing communism")
+  time.sleep(3)
+  image = cv.imread("lbj.jpg")
+  cv.imshow("Press any key to exit", image)
+  cv.waitKey(0)
+  cv.destroyAllWindows()
+  print("a)Korea b)Lebanon c)Vietnam d)Cuba")
+  winsound.PlaySound("sounds/timer.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
+  inputtime("c)Vietnam", 10000, 60)
+  check_ans(answer, 40000, 10000, 20000, "a", "c)Vietnam", "d)Cuba", "c)Vietnam", 60, 10)
 tenth()
 print("Congratulations, You have successfully passed the 2nd stage! Now you will take at least Rs 3,20,000 from here")
 time.sleep(3.5)
