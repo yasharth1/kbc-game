@@ -1,5 +1,6 @@
-# Welcome, here are the guideline if you need them again
+# Welcome, here are the guidelines if you need them again
 # lifeline - to use lifeline
+# quit - to quit the game
 # Either run "pip install -r requirements.txt" or install the packages separately
 import threading
 import pyttsx3 # pip install pyttsx3
