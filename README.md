@@ -1,5 +1,6 @@
 # kbc-game-py
-A working python version of the game "Who wants to be a millionare?". Features include-
+Have you always wanted to go to "Who wants to be a millionaire?" but did not get selected? Do not worry, as here I am, presenting before you
+a working python version of the game "Who wants to be a millionare?". Features include-
   1. Lifelines (Audience Poll, 50-50, Ask the Expert, Flip the question)
   2. Picture and video questions
   3. Sound effects for everything make it immersive
