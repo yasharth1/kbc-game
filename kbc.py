@@ -1,3 +1,4 @@
+# IMPORTANT NOTE- The code for setting the time limit on the first few questions has been copied from ChatGPT, so please don't ask me how it works
 # Welcome, here are the guidelines if you need them again
 # lifeline - to use lifeline
 # quit - to quit the game
