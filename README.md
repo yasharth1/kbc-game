@@ -19,7 +19,4 @@ Before running the code, please run 'pip install -r requirements.txt' in the ter
   7. OpenCv (*pip install opencv-python*)
  
  <!-- -->
-**IMPORTANT NOTE (PLS READ BEFORE RUNNING)** - The code for setting the time limit on the first few questions has been copied from ChatGPT's response, so pls don't ask me to explain it.
-**IMPORTANT- *Rest of the code is original.***
- 
  P.S.- The current code is too long (about 600+ lines). Work is in progress to make it much shorter and simple.
